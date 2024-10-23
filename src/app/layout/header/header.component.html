@@ -1,4 +1,8 @@
 
-<p-menubar [model]="items" />
+<p-menubar [model]="items" >
+    <ng-template pTemplate="end">
+        <p-button label="connection" routerLink="/login"/>
+    </ng-template>
+</p-menubar>
 
 

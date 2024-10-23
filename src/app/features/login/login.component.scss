@@ -1,0 +1,58 @@
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .flex-column {
+    flex-direction: column;
+  }
+  
+  .align-items-center {
+    align-items: center;
+  }
+  
+  .justify-content-center {
+    justify-content: center;
+  }
+  
+  .gap-2 {
+    gap: 0.5rem;
+  }
+  
+  .gap-3 {
+    gap: 1rem;
+  }
+  
+  .w-full {
+    width: 100%;
+  }
+  
+  .md\\:w-5 {
+    width: 40%; /* Adjust this width as needed */
+  }
+  
+  .md\\:w-1 {
+    width: 2rem; /* Spacer between the two sections */
+  }
+  
+  .p-button-primary {
+    background-color: #4285F4; /* Blue for the login button */
+  }
+  
+  .p-button-success {
+    background-color: #34A853; /* Green for the sign-up button */
+  }
+  
+  .p-button {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+  }
+  
