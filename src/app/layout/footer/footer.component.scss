@@ -1,0 +1,23 @@
+$primary-color: #288080;
+$secondary-color: #2fac67;
+// $dark-primary: #3c287f;
+$light-primary: #2fab67;
+$text-color: #fff;
+
+footer {
+    background-color: $primary-color;
+    color: $text-color;
+    text-align: center;
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+  
+    a {
+      color: $secondary-color;
+      font-weight: bold;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }

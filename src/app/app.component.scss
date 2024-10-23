@@ -1,0 +1,9 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Assure que le contenu prend toute la hauteur de la fenêtre */
+  }
+
+  main {
+    flex: 1; /* Prend tout l'espace disponible entre le header et le footer */
+  }
