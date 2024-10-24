@@ -8,20 +8,3 @@
     flex: 1; /* Prend tout l'espace disponible entre le header et le footer */
   }
 
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Occuper la hauteur totale de l'écran */
-    background-color: #f5f5f5;
-  }
-  
-  .form-box {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px; /* Ajuster la largeur du formulaire */
-  }
-  

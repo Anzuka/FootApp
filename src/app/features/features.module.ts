@@ -11,6 +11,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
+import { CalendarModule } from 'primeng/calendar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -28,7 +30,8 @@ import { PasswordModule } from 'primeng/password';
     InputTextModule,
     FormsModule,
     ReactiveFormsModule,
-    PasswordModule
+    PasswordModule,
+    CalendarModule
   ]
 })
 export class FeaturesModule { }

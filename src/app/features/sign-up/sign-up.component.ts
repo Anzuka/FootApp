@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { UserRegisterModel } from './models/user.register.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Calendar } from 'primeng/calendar';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SignUpComponent {
   userForm!: FormGroup;
+  maxDate: Date = new Date();
 
 
   constructor(private fb: FormBuilder) { }
@@ -18,7 +19,7 @@ export class SignUpComponent {
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      birthdate: ['', Validators.required],
+      birthdate: [null, Validators.required],
       phoneNumber: ['', Validators.required],
       street: ['', Validators.required],
       city: ['', Validators.required],
@@ -26,8 +27,8 @@ export class SignUpComponent {
       state: ['', Validators.required],
       country: ['', Validators.required],
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
