@@ -1,1 +1,84 @@
-<p>sign-up works!</p>
+<div class="container">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-box">
+    <h1 class="titleform">Register</h1>
+    <hr>
+    <!-- Username -->
+    <div class="field-container ">
+      <label for="username">Username</label>
+      <input pInputText id="username" formControlName="username" placeholder="Username" />
+    </div>
+
+    <!-- Password -->
+    <div class="field-container ">
+      <label for="password">Password</label>
+      <input type="password"s pPassword id="password" formControlName="password" placeholder="Password" />
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="field-container ">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" pPassword id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm Password" />
+    </div>
+    <hr>
+    <!-- First Name -->
+    <div class="field-container ">
+      <label for="firstname">First Name</label>
+      <input pInputText id="firstname" formControlName="firstname" placeholder="First Name" />
+    </div>
+
+    <!-- Last Name -->
+    <div class="field-container ">
+      <label for="lastname">Last Name</label>
+      <input pInputText id="lastname" formControlName="lastname" placeholder="Last Name" />
+    </div>
+
+    <!-- Email -->
+    <div class="field-container ">
+      <label for="email">Email</label>
+      <input pInputText id="email" formControlName="email" placeholder="Email Address" />
+    </div>
+
+    <!-- Birthdate -->
+    <div class="field-container ">
+      <label for="birthdate">Birthdate</label>
+      <p-calendar dateFormat="dd.mm.yy" formControlName="birthdate" [maxDate]="maxDate"/> 
+    </div>
+    <hr>
+
+    <!-- Address  -->
+    <!-- Street -->
+    <div class="field-container ">
+      <label for="street">Street</label>
+      <input pInputText id="street" formControlName="street" placeholder="Street Address" />
+    </div>
+
+    <!-- City -->
+    <div class="field-container ">
+      <label for="city">City</label>
+      <input pInputText id="city" formControlName="city" placeholder="City" />
+    </div>
+
+    <!-- Zip Code -->
+    <div class="field-container ">
+      <label for="zip">ZIP Code</label>
+      <input pInputText id="zip" formControlName="zip" placeholder="ZIP Code" />
+    </div>
+
+    <!-- State -->
+    <div class="field-container ">
+      <label for="state">State</label>
+      <input pInputText id="state" formControlName="state" placeholder="State" />
+    </div>
+
+    <!-- Country -->
+    <div class="field-container ">
+      <label for="country">Country</label>
+      <input pInputText id="country" formControlName="country" placeholder="Country" />
+    </div>
+
+    <!-- Submit Button -->
+    <div >
+      <p-button label="Submit" icon="pi pi-check" type="submit"></p-button>
+    </div>
+  </form>
+</div>

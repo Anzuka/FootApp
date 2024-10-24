@@ -1,1 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
+/* Global container to center everything */
+.container {
+    display: flex;
+    justify-content: center;  /* Horizontal centering */
+    align-items: center;      /* Vertical centering */
+    min-height: 100vh;        /* Takes full viewport height */
+  }
+  
+  /* Optional box styling for the form */
+  .form-box {
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);  /* Light shadow for depth */
+    width: 50%;
+  }
+  
+  
+  /* Container for the label and input */
+.field-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: 100%;  
+}
+
+/* Styling for labels */
+.field-container  label {
+  font-family: 'Arial', sans-serif; /* Utilisation d'une police claire et lisible */
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333; /* Couleur pour un bon contraste */
+  margin-bottom: 0.5rem; /* Espacement entre le label et l'input */
+
+  
+}
+
+/* Styling for input fields */
+.field-container input{
+  padding: 0.8rem;
+  border: 1px solid #ccc; /* Subtle border */
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 50%; /* Full width within the parent container */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: border-color 0.3s ease-in-out;
+}
+
+/* On hover, change the border color */
+.field-container  input:hover {
+  border-color: #888; /* Bordure changeante au survol */
+}
+
+/* On focus, emphasize the input */
+.field-container  input:focus {
+  border-color: #007BFF; /* Couleur de mise en évidence (par exemple, bleu) */
+  outline: none; /* Enlève la bordure par défaut lors de la mise au point */
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); /* Éclaircit l'input */
+}
