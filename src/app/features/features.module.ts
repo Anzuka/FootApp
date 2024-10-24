@@ -9,6 +9,8 @@ import { DividerModule } from 'primeng/divider';
 import { InputTextModule } from 'primeng/inputtext';
 
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PasswordModule } from 'primeng/password';
 
 
 
@@ -23,7 +25,10 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     FeaturesRoutingModule,
     ButtonModule, 
     DividerModule,
-    InputTextModule
+    InputTextModule,
+    FormsModule,
+    ReactiveFormsModule,
+    PasswordModule
   ]
 })
 export class FeaturesModule { }
