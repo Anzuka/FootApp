@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Calendar } from 'primeng/calendar';
 
 @Component({
   selector: 'app-sign-up',
