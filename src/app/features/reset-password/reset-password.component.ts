@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
 @Component({
@@ -8,32 +8,39 @@ import {Router} from '@angular/router';
   styleUrl: './reset-password.component.scss'
 })
 export class ResetPasswordComponent {
-  resetPasswordForm: FormGroup;
-  captchaResolved = false;
+  newPasswordForm: FormGroup;
 
   constructor(private fb: FormBuilder, private router: Router) {
-    this.resetPasswordForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]]
-    });
+    this.newPasswordForm = this.fb.group({
+      newPassword: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', Validators.required]
+    }, { validators: this.passwordsMatchValidator });
   }
 
-  get email() {
-    return this.resetPasswordForm.get('email')!;
+  // Validation pour vérifier si les deux mots de passe correspondent
+  passwordsMatchValidator(form: AbstractControl): { [key: string]: boolean } | null {
+    const newPassword = form.get('newPassword')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+    return newPassword === confirmPassword ? null : { passwordMismatch: true };
   }
 
-  onSubmit() {
-    if (this.resetPasswordForm.valid && this.captchaResolved) {
-      const email = this.resetPasswordForm.value.email;
-      console.log("Réinitialisation de mot de passe pour:", email);
-      // Ici, tu peux ajouter le code pour envoyer la demande au serveur.
+  get newPassword() {
+    return this.newPasswordForm.get('newPassword');
+  }
+
+  get confirmPassword() {
+    return this.newPasswordForm.get('confirmPassword');
+  }
+
+  onSubmit(): void {
+    if (this.newPasswordForm.valid) {
+      const newPassword = this.newPasswordForm.value.newPassword;
+      console.log("Setting new password:", newPassword);
+
+      // Logique pour soumettre le mot de passe au serveur ici...
+
+      this.router.navigate(['/login']); // Redirige vers la page de connexion après le succès
     }
   }
 
-  onCaptchaResolved(captchaResponse: string | null) {
-    this.captchaResolved = !!captchaResponse; // Met à true si le reCAPTCHA est résolu
-  }
-
-  goBack() {
-    this.router.navigate(['/login']); // Redirige vers la page de connexion
-  }
 }

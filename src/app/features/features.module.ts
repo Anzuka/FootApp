@@ -12,10 +12,10 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { CalendarModule } from 'primeng/calendar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { RequestNewPasswordComponent } from './request-new-password/request-new-password.component';
 import { RecaptchaModule } from 'ng-recaptcha';
-import { ResetPasswordConfirmationComponent } from './reset-password-confirmation/reset-password-confirmation.component';
+import { RequestNewPasswordConfirmationComponent } from './request-new-password-confirmation/request-new-password-confirmation.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 
@@ -24,8 +24,9 @@ import { ResetPasswordConfirmationComponent } from './reset-password-confirmatio
     HomeComponent,
     LoginComponent,
     SignUpComponent,
-    ResetPasswordComponent,
-    ResetPasswordConfirmationComponent
+    RequestNewPasswordComponent,
+    RequestNewPasswordConfirmationComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,
