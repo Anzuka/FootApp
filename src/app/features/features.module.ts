@@ -13,6 +13,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { CalendarModule } from 'primeng/calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { RecaptchaModule } from 'ng-recaptcha';
+import { ResetPasswordConfirmationComponent } from './reset-password-confirmation/reset-password-confirmation.component';
 
 
 
@@ -20,18 +23,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [
     HomeComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    ResetPasswordComponent,
+    ResetPasswordConfirmationComponent
   ],
   imports: [
     CommonModule,
     FeaturesRoutingModule,
-    ButtonModule, 
+    ButtonModule,
     DividerModule,
     InputTextModule,
     FormsModule,
     ReactiveFormsModule,
     PasswordModule,
-    CalendarModule
+    CalendarModule,
+    RecaptchaModule
   ]
 })
 export class FeaturesModule { }

@@ -1,6 +1,6 @@
 <div class="flex flex-column align-items-center justify-content-center min-h-screen">
     <div class="flex flex-column md:flex-row align-items-center justify-content-center gap-5 w-full md:w-8">
-      
+
       <!-- Login Section -->
       <div class="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
         <div class="flex flex-wrap justify-content-center align-items-center gap-2">
@@ -13,18 +13,22 @@
         </div>
         <p-button label="Login" icon="pi pi-user" styleClass="p-button-primary w-10rem mx-auto" />
       </div>
-  
+
+      <!-- Forgot password link?" -->
+      <div class="forgot-password">
+        <a routerLink="/reset-password">Forgot your password?</a>
+      </div>
+
       <!-- Divider Section -->
       <div class="w-full md:w-1 flex justify-content-center align-items-center">
         <p-divider layout="vertical" styleClass="hidden md:flex">
           <b>OR</b>
         </p-divider>
       </div>
-  
+
       <!-- Sign Up Section -->
       <div class="w-full md:w-5 flex align-items-center justify-content-center py-5">
         <p-button label="Sign Up" icon="pi pi-user-plus" styleClass="p-button-success w-10rem" routerLink="/signup"/>
       </div>
     </div>
   </div>
-  
