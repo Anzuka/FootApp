@@ -1,0 +1,44 @@
+# ARCHITECTURE
+------------
+src/
+├── app/
+│   ├── core/                      # Core services (Auth, HTTP interceptors)
+│   ├── shared/                    # Shared components (Button, Spinner)
+│   ├── features/
+│   │   ├──user/                      # User module and components (+ exemples)
+│   │   │   ├──login/
+│   │   │   ├──register/
+│   │   │   ├──profile/
+│   │   │   ├──user.module.ts
+│   │   │   └──user-routing.module.ts      
+│   │   ├──admin/                     # Admin module and components
+│   │   ├──moderator/                 # Moderator module and components
+│   │   ├──tournament/                # Tournament module and components
+│   │   ├──team/                      # Team module and components
+│   │   ├──match/                     # Match module and components
+│   │   ├──player/                    # Player module and components
+│   │   ├──coach/                     # Coach module and components
+│   │   ├──bracket/                   # Bracket module and components
+│   │   ├──ranking/                   # Ranking module and components
+│   │   ├──referee/                   # Referee module and components
+│   │   ├──favorite/                  # Favorite module and components
+│   │   └──notification/              # Notification module and components
+│   ├── app-routing.module.ts
+│   ├── app.module.ts
+
+
+# NAV
+------------
+├── HOME/
+├── TOURNAMENTS/
+│   │   ├──MY TOURNAMENTS/                  // Tournois organisés par l’utilisateur
+│   │	├──MY PARTICIPATION/             	// Suivi des tournois auxquels l'utilisateur participe
+│   │   └──SEARCH TOURNAMENT/           	// Recherche de tournois (En cours / Ouvert / Fini)
+├── TEAMS/
+│   │   ├──MY TEAMS/                       	// Teams créés par l'utilisateur  
+│   │   └──SEARCH TEAMS/              		// Recherche des teams     
+├── FAVORITES/ 
+│   ├── FAVORITE MATCHS/
+│   ├── FAVORITE TEAMS/
+│   ├── MODERATE/
+├── USER/
