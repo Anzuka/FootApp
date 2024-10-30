@@ -5,8 +5,12 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
-    {path:'user', loadChildren: ()=> import('./user/user.module')
-      .then(m => m.UserModule),},
+    {
+      path:'user', loadChildren: ()=> import('./user/user.module').then(m => m.UserModule)
+    },
+    { 
+      path: 'tournament', loadChildren: () => import('./tournament/tournament.module').then(m => m.TournamentModule)
+    }
 
 ];
 
