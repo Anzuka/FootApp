@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {SharedModule} from '../../shared/shared.module';
 
 import { UserRoutingModule } from './user-routing.module';
 import {LoginComponent} from './login/login.component';
@@ -13,7 +13,6 @@ import {CalendarModule} from 'primeng/calendar';
 import {ButtonModule} from 'primeng/button';
 import {DividerModule} from 'primeng/divider';
 import {InputTextModule} from 'primeng/inputtext';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -25,13 +24,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ResetPasswordComponent,
   ],
   imports: [
-    CommonModule,
     UserRoutingModule,
+    SharedModule,
     ButtonModule,
     DividerModule,
     InputTextModule,
-    FormsModule,
-    ReactiveFormsModule,
     PasswordModule,
     CalendarModule,
     RecaptchaModule,
