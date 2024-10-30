@@ -39,7 +39,7 @@ export class ResetPasswordComponent {
 
       // Logique pour soumettre le mot de passe au serveur ici...
 
-      this.router.navigate(['/login']); // Redirige vers la page de connexion après le succès
+      this.router.navigate(['/user/login']); // Redirige vers la page de connexion après le succès
     }
   }
 
