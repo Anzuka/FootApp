@@ -14,6 +14,7 @@ const routes: Routes = [
     { path: 'request-new-password', component: RequestNewPasswordComponent},
     { path: 'request-new-password-confirmation', component: RequestNewPasswordConfirmationComponent},
     { path: 'reset-password', component: ResetPasswordComponent},
+    { path: 'tournament', loadChildren: () => import('./tournament/tournament.module').then(m => m.TournamentModule)}
 
 
 ];

@@ -1,0 +1,9 @@
+<div class="tournament-list-container">
+    <!-- Card pour le tournoi Knockout -->
+     @for (tournament of tournaments; track tournament.id) {
+
+        <app-tournament-card [tournament]="tournament"></app-tournament-card>
+     }
+   
+  </div>
+  

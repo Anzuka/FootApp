@@ -1,0 +1,8 @@
+/* Container de la liste des tournois */
+.tournament-list-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap; /* Pour que les cartes passent à la ligne si nécessaire */
+    padding: 2rem;
+}
