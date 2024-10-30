@@ -13,29 +13,6 @@ import { TournamentStatus } from '../tools/enums/tournament-status';
 export class TournamentListComponent {
 
   tournaments!: TournamentCardModel[];
-  // tournaments: TournamentCardModel[] = [
-  //   {
-  //     id: 1,
-  //     name: 'Tournoi du week end',
-  //     type: TournamentType.KNOCKOUT_8,
-  //     img: 'assets/tournament/knockout-tournament-image.png',
-  //     status: TournamentStatus.PENDING
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Ranking 8 Tournament',
-  //     type: TournamentType.CHAMPIONSHIP_8,
-  //     img: 'assets/tournament/championship-tournament-image.png',
-  //     status: TournamentStatus.BUILDING
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'Championship BXL',
-  //     type: TournamentType.COPA_AMERICA_16,
-  //     img: 'assets/tournament/championship-knockout-tournament-image.png',
-  //     status: TournamentStatus.CLOSED
-  //   }
- // ];
 
   constructor(private _tournamentService: TournamentService) { }
 

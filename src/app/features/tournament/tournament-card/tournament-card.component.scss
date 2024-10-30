@@ -1,7 +1,7 @@
   /* Style de la card */
   .tournament-card {
     width: 250px;
-    height: 220px;
+    height: 240px;
     border: 2px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
@@ -9,15 +9,31 @@
     transition: transform 0.2s ease-in-out;
     text-align: center;
     font-family: Arial, sans-serif;
+    -webkit-box-shadow: inset 5px 2px 25px 9px rgba(0,0,0,0.1); 
+    box-shadow: inset 5px 2px 25px 9px rgba(0,0,0,0.1);
+  }
+
+  .tournament-card-bottom{
+    margin-left: 2px;
+    margin-right: 2px;
+    border-width: 1px 1px 2px 2px;
+    border-style: solid;
+    border-color: #6666668d;
+    border-radius: 8px;
+    -webkit-box-shadow: inset 5px 2px 25px 9px ; 
+    box-shadow: inset 5px 2px 25px 9px rgba(0,0,0,0.1);
   }
 
   .tournament-status{
     width: 50%;
-    background-color: #4d8ab0;
+    background-color: #405156;
     color: white;
     float:right;
     font-size: 0.75rem;
     text-transform: uppercase;
+    -webkit-border-radius: 0px 20px 0px 20px;
+    -moz-border-radius: 0px 20px 0px 20px;
+    border-radius: 0px 20px 0px 20px;
   }
   
   .tournament-card:hover {
@@ -30,7 +46,10 @@
     width: 100%;
     height: 120px;
     object-fit: cover;
-    border-bottom: 2px solid #ddd;
+    border-width: 0px 0px 0px 0px;
+    border-style: solid;
+    border-color: #6666668d;
+
   }
   
   /* Type et taille du tournoi */
