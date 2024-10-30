@@ -11,9 +11,9 @@ export class HeaderComponent {
   ngOnInit() {
     this.items = [
       {
-        label: 'File',
+        label: 'Tournament',
         items: [
-          { label: 'New', icon: 'pi pi-fw pi-plus' },
+          { label: 'My Tournaments', icon: 'pi pi-fw pi-plus', url: '/tournament/list' },
           { label: 'Open', icon: 'pi pi-fw pi-external-link' },
           { label: 'Quit', icon: 'pi pi-fw pi-times' }
         ]
