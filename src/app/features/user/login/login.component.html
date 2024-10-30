@@ -5,13 +5,14 @@
       <div class="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
         <div class="flex flex-wrap justify-content-center align-items-center gap-2">
           <label class="w-6rem">Username</label>
-          <input pInputText id="username" type="text" class="w-12rem" />
+          <input pInputText id="username" type="text" class="w-12rem" [(ngModel)]="username" />
         </div>
         <div class="flex flex-wrap justify-content-center align-items-center gap-2">
           <label class="w-6rem">Password</label>
-          <input pInputText id="password" type="password" class="w-12rem" />
+          <input pInputText id="password" type="password" class="w-12rem" [(ngModel)]="password" />
         </div>
-        <p-button label="Login" icon="pi pi-user" styleClass="p-button-primary w-10rem mx-auto" />
+        <p-button label="Login" icon="pi pi-user" styleClass="p-button-primary w-10rem mx-auto" (click)="login()" />
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
       </div>
 
       <!-- Forgot password link?" -->
