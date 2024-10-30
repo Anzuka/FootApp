@@ -61,12 +61,15 @@ export class TournamentListComponent {
   }
 
   private getImageForType(type: TournamentType): string {
-    switch (type) {
-      case TournamentType.KNOCKOUT_8: return 'assets/tournament/knockout-tournament-image.png';
-      case TournamentType.CHAMPIONSHIP_8: return 'assets/tournament/championship-tournament-image.png';
-      case TournamentType.COPA_AMERICA_16: return 'assets/tournament/championship-knockout-tournament-image.png';
-      default: return 'assets/tournament/default-tournament-image.png';
-    }
+
+    if(type.startsWith("KNOCKOUT"))
+      return "assets/tournament/knockout-tournament-image.png";
+
+    if(type.startsWith("CHAMPIONSHIP"))
+      return "assets/tournament/championship-tournament-image.png";
+
+    return "assets/tournament/championship-knockout-tournament-image.png";
+
   }
 
 }
