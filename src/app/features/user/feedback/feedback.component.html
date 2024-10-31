@@ -1,0 +1,4 @@
+<div class="feedback-container" [ngClass]="feedbackClass">
+  <p [innerHTML]="message"></p>
+  <button *ngIf="isSuccess" routerLink="/user/login">Back to Login</button>
+</div>
