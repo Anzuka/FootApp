@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../tools/user.service';
+import {passwordStrengthValidator} from '../tools/validators/password-strength-validator';
 
 @Component({
   selector: 'app-reset-password',
@@ -12,6 +13,9 @@ export class ResetPasswordComponent implements OnInit {
   newPasswordForm: FormGroup;
   errorMessage?: string = '' || undefined ;
   token: string = '';
+  showFeedback: boolean = false;
+  feedbackMessage: string = '';
+  isSuccess: boolean = true;
 
   constructor(
       private _fb: FormBuilder,
@@ -20,7 +24,7 @@ export class ResetPasswordComponent implements OnInit {
       private _userService: UserService,
     ) {
       this.newPasswordForm = this._fb.group({
-        newPassword: ['', [Validators.required, Validators.minLength(8)]],
+        newPassword: ['', [Validators.required, passwordStrengthValidator()]],
         confirmPassword: ['', Validators.required]
       }, { validators: this.passwordsMatchValidator });
   }
@@ -55,16 +59,23 @@ export class ResetPasswordComponent implements OnInit {
     if (this.newPasswordForm.valid) {
       const newPassword = this.newPasswordForm.value.newPassword;
       const confirmPassword = this.newPasswordForm.value.confirmPassword;
-      console.log("New Password:", newPassword);
-      console.log("Confirm Password:", confirmPassword);
+      //console.log("New Password:", newPassword);
+      //console.log("Confirm Password:", confirmPassword);
 
       this._userService.resetPassword(this.token, newPassword, confirmPassword).subscribe({
-        next: (result) => {
-          console.log(result)
+        next: () => {
+          this.feedbackMessage = "Thank you! Your password has been successfully modified. You can now use it to connect into your favorite app.";
+          this.isSuccess = true;
+          this.showFeedback = true;
+          //console.log(result)
+          //alert("Your password has been updated successfully.");
           //this._router.navigate(["/user/login"]);
         },
-        error: (result) => {
-          console.log(result.error)
+        error: (data) => {
+          this.feedbackMessage = data.error?.error || 'An unexpected error occurred. Please try again.';
+          this.isSuccess = false;
+          this.showFeedback = true;
+          //console.log(result.error)
           //this.errorMessage = error.error || 'Password reset failed. Please try again.';
         }
       });
