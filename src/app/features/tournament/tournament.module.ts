@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { TournamentRoutingModule } from './tournament-routing.module';
 import { TournamentCardComponent } from './tournament-card/tournament-card.component';
 import { TournamentInfoComponent } from './tournament-info/tournament-info.component';
+import { TournamentFormComponent } from './tournament.form/tournament.form.component';
 
 
 
@@ -13,7 +14,8 @@ import { TournamentInfoComponent } from './tournament-info/tournament-info.compo
   declarations: [
     TournamentListComponent,
     TournamentCardComponent,
-    TournamentInfoComponent
+    TournamentInfoComponent,
+    TournamentFormComponent
   ],
   imports: [
     CommonModule,
