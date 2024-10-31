@@ -6,8 +6,8 @@ import { TournamentFormComponent } from './tournament.form/tournament.form.compo
 
 const routes: Routes = [
     { path:'list', component: TournamentListComponent},
-    { path: ':id', component: TournamentInfoComponent},
-    { path: 'new', component: TournamentFormComponent}
+    { path: 'new', component: TournamentFormComponent},
+    { path: 'details/:id', component: TournamentInfoComponent},
 ]
 
 @NgModule({
