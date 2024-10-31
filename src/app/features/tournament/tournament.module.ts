@@ -5,13 +5,15 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { TournamentRoutingModule } from './tournament-routing.module';
 import { TournamentCardComponent } from './tournament-card/tournament-card.component';
+import { TournamentInfoComponent } from './tournament-info/tournament-info.component';
 
 
 
 @NgModule({
   declarations: [
     TournamentListComponent,
-    TournamentCardComponent
+    TournamentCardComponent,
+    TournamentInfoComponent
   ],
   imports: [
     CommonModule,

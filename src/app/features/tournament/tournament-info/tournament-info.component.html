@@ -1,0 +1,27 @@
+<div class="tournament-detail-container">
+    <div class="tournament-card">
+        @if(tournament){
+            <h2 class="tournament-title">{{ tournament.title }}</h2>
+  
+            <div class="tournament-info">
+              <p><strong>Start Date:</strong> {{ tournament.startDate | date: 'dd MMMM yyyy, HH:mm' }}</p>
+              <p><strong>End Date:</strong> {{ tournament.endDate | date: 'dd MMMM yyyy, HH:mm' }}</p>
+              <p><strong>Location:</strong> {{ tournament.placeName }}</p>
+              @if(tournament.address){
+                <div class="address">
+                    <p><strong>Address:</strong></p>
+                    <p>{{ tournament.address.street }}, {{ tournament.address.city }}</p>
+                    <p>{{ tournament.address.state }}, {{ tournament.address.zip }}, {{ tournament.address.country }}</p>
+                  </div>
+              }
+              <p><strong>Tournament Type:</strong> {{ tournament.tournamentType }}</p>
+              <p><strong>Status:</strong> 
+                <span class="status {{ tournament.tournamentStatus | lowercase }}">
+                  {{ tournament.tournamentStatus }}
+                </span>
+              </p>
+            </div>
+        }
+    </div>
+  </div>
+  
