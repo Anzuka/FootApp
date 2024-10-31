@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {UserService} from '../tools/user.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-request-new-password',
@@ -10,9 +12,14 @@ import {Router} from '@angular/router';
 export class RequestNewPasswordComponent {
   requestNewPasswordForm: FormGroup;
   captchaResolved = false;
+  errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.requestNewPasswordForm = this.fb.group({
+  constructor(
+    private _fb: FormBuilder,
+    private _router: Router,
+    private _userService: UserService,
+  ) {
+    this.requestNewPasswordForm = this._fb.group({
       email: ['', [Validators.required, Validators.email]]
     });
   }
@@ -25,7 +32,23 @@ export class RequestNewPasswordComponent {
     if (this.requestNewPasswordForm.valid && this.captchaResolved) {
       const email = this.requestNewPasswordForm.value.email;
       console.log("Réinitialisation de mot de passe pour:", email);
-      // Ici, tu peux ajouter le code pour envoyer la demande au serveur.
+
+      this._userService.requestPassword(email).subscribe({
+        next: (result) => {
+          console.log('check your mails', result);
+          this._router.navigate(["/user/request-new-password-confirmation"]);
+
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error('Erreur de request password : ', error);
+
+          if (error.error) {
+            this.errorMessage = error.error;
+          } else {
+            this.errorMessage = 'Erreur de request password , veuillez réessayer.'; // Message générique en cas de problème
+          }
+        }
+      })
     }
   }
 

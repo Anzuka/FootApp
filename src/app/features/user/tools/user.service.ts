@@ -24,4 +24,17 @@ export class UserService {
   }
 
 
+  requestPassword(email: string): Observable<any>{
+    const data = {
+      email: email
+    }
+    return this._http.post(`${this.apiUrl}/request-password`, data)
+  }
+
+  resetPassword(token: string, password: string, confirmPassword: string): Observable<any> {
+    const data = { password: password, confirmPassword: confirmPassword }; // Assurez-vous que ces champs correspondent à PasswordResetForm
+    return this._http.post(`${this.apiUrl}/reset-password?token=${token}`, data);
+  }
+
+
 }
