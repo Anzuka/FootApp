@@ -14,4 +14,8 @@ export class TournamentService {
   getAll(): Observable<TournamentModel[]>{
     return this.http.get<TournamentModel[]>(this._tournamentEndPoint);
   }
+
+  getById(id: number): Observable<TournamentModel> {
+    return this.http.get<TournamentModel> (`${this._tournamentEndPoint}/${id}`);
+  }
 }
