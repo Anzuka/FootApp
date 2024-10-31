@@ -1,8 +1,11 @@
 <div class="tournament-card {{getColourClass(tournament)}}">
     <div class="tournament-status" >{{tournament.status}}</div>
     <img [src]="tournament.img" alt="Tournoi du week end">
-    <div class="tournament-type">{{tournament.type}}</div>
-    <div class="tournament-name">{{tournament.name}}</div>
+    <div class="tournament-card-bottom">
+        <div class="tournament-type">{{tournament.type}}</div>
+        <div class="tournament-name">{{tournament.name}}</div>
+    </div>
+
 </div>
 
 

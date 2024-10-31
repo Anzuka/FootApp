@@ -17,7 +17,7 @@ import { TournamentCardComponent } from './tournament-card/tournament-card.compo
     CommonModule,
     CardModule,
     ButtonModule,
-    TournamentRoutingModule
+    TournamentRoutingModule,
   ]
 })
 export class TournamentModule { }

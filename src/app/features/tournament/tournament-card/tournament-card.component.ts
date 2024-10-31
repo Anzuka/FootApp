@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TournamentListModel } from './models/tournament.list.model';
+import { TournamentCardModel } from './models/tournament.card.model';
 
 @Component({
   selector: 'app-tournament-card',
@@ -10,11 +10,11 @@ export class TournamentCardComponent {
 
 
   @Input({ required: true })
-  tournament!:TournamentListModel;
+  tournament!:TournamentCardModel;
 
   constructor(){ }
 
-  getColourClass(tournament: TournamentListModel): string {
+  getColourClass(tournament: TournamentCardModel): string {
     if(tournament.type.startsWith("KNOCKOUT"))
       return "knockout";
 
