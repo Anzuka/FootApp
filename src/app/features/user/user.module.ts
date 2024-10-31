@@ -13,6 +13,7 @@ import {CalendarModule} from 'primeng/calendar';
 import {ButtonModule} from 'primeng/button';
 import {DividerModule} from 'primeng/divider';
 import {InputTextModule} from 'primeng/inputtext';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {InputTextModule} from 'primeng/inputtext';
     RequestNewPasswordComponent,
     RequestNewPasswordConfirmationComponent,
     ResetPasswordComponent,
+    FeedbackComponent,
   ],
   imports: [
     UserRoutingModule,
