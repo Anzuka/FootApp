@@ -1,21 +1,40 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {UserService} from '../tools/user.service';
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.scss'
 })
-export class ResetPasswordComponent {
+export class ResetPasswordComponent implements OnInit {
   newPasswordForm: FormGroup;
+  errorMessage?: string = '' || undefined ;
+  token: string = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.newPasswordForm = this.fb.group({
-      newPassword: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', Validators.required]
-    }, { validators: this.passwordsMatchValidator });
+  constructor(
+      private _fb: FormBuilder,
+      private _router: Router,
+      private _route: ActivatedRoute,
+      private _userService: UserService,
+    ) {
+      this.newPasswordForm = this._fb.group({
+        newPassword: ['', [Validators.required, Validators.minLength(8)]],
+        confirmPassword: ['', Validators.required]
+      }, { validators: this.passwordsMatchValidator });
   }
+
+
+  ngOnInit() {
+    this._route.queryParams.subscribe(param => {
+      this.token = param['token'] || '';
+      if (!this.token) {
+        this.errorMessage = 'Token is missing in the URL';
+      }
+    })
+  }
+
 
   // Validation pour vérifier si les deux mots de passe correspondent
   passwordsMatchValidator(form: AbstractControl): { [key: string]: boolean } | null {
@@ -35,11 +54,22 @@ export class ResetPasswordComponent {
   onSubmit(): void {
     if (this.newPasswordForm.valid) {
       const newPassword = this.newPasswordForm.value.newPassword;
-      console.log("Setting new password:", newPassword);
+      const confirmPassword = this.newPasswordForm.value.confirmPassword;
+      console.log("New Password:", newPassword);
+      console.log("Confirm Password:", confirmPassword);
 
-      // Logique pour soumettre le mot de passe au serveur ici...
+      this._userService.resetPassword(this.token, newPassword, confirmPassword).subscribe({
+        next: (result) => {
+          console.log(result)
+          //this._router.navigate(["/user/login"]);
+        },
+        error: (result) => {
+          console.log(result.error)
+          //this.errorMessage = error.error || 'Password reset failed. Please try again.';
+        }
+      });
 
-      this.router.navigate(['/user/login']); // Redirige vers la page de connexion après le succès
+      //this._router.navigate(['/user/login']); // Redirige vers la page de connexion après le succès
     }
   }
 
