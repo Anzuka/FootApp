@@ -7,6 +7,8 @@ import { TournamentRoutingModule } from './tournament-routing.module';
 import { TournamentCardComponent } from './tournament-card/tournament-card.component';
 import { TournamentInfoComponent } from './tournament-info/tournament-info.component';
 import { TournamentFormComponent } from './tournament.form/tournament.form.component';
+import { CalendarModule } from 'primeng/calendar';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -22,6 +24,8 @@ import { TournamentFormComponent } from './tournament.form/tournament.form.compo
     CardModule,
     ButtonModule,
     TournamentRoutingModule,
+    CalendarModule,
+    ReactiveFormsModule
   ]
 })
 export class TournamentModule { }
