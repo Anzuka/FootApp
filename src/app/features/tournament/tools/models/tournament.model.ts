@@ -7,7 +7,7 @@ export interface TournamentModel {
   startDate: Date; 
   endDate: Date;
   placeName: string;
-  address: Address;
+  address?: Address;
   tournamentType: TournamentType;
   tournamentStatus: TournamentStatus;
 }
