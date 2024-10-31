@@ -6,3 +6,18 @@
     flex-wrap: wrap; /* Pour que les cartes passent à la ligne si nécessaire */
     padding: 2rem;
 }
+
+.add-card {
+    width: 250px;
+    height: 240px;
+    border-radius: 8px;
+    overflow: hidden;
+
+}
+
+.add-card:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+    filter: invert(46%) sepia(73%) saturate(2265%) hue-rotate(169deg) brightness(98%) contrast(101%);
+}
+
