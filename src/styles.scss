@@ -50,6 +50,16 @@
   transition: border-color 0.3s ease-in-out;
 }
 
+.field-container select{
+  padding: 0.8rem;
+  border: 1px solid #ccc; /* Subtle border */
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 50%; /* Full width within the parent container */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: border-color 0.3s ease-in-out;
+}
+
 /* On hover, change the border color */
 .field-container  input:hover {
   border-color: #888; /* Bordure changeante au survol */
@@ -60,4 +70,11 @@
   border-color: #007BFF; /* Couleur de mise en évidence (par exemple, bleu) */
   outline: none; /* Enlève la bordure par défaut lors de la mise au point */
   box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); /* Éclaircit l'input */
+}
+
+
+.error-message {
+  color: #d32f2f;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
 }

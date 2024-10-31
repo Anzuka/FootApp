@@ -1,0 +1,92 @@
+<div class="container">
+    <form [formGroup]="tournamentForm" (ngSubmit)="onSubmit()" class="form-box">
+      <h1 class="titleform">Create a Tournament</h1>
+      <hr>
+      <!-- Title -->
+      <div class="field-container ">
+        <label for="title">Title</label>
+        <input pInputText id="title" formControlName="title" placeholder="Title" />
+        <div class="error-message" *ngIf="tournamentForm.get('title')?.errors && tournamentForm.get('title')?.touched">
+          Title is required
+        </div>
+      </div>
+
+    <!-- Tournament Type -->
+      <div class="field-container">
+        <label for="tournamentType">Tournament Type</label>
+        <select name="tournamentType" id="tournamentType" formControlName="tournamentType">
+        <option value="">--Please choose an option--</option>
+        @for (tournamentType of tournamentTypes; track tournamentType) {
+            <option [ngValue]="tournamentType">
+                {{tournamentType}}
+              </option>
+        }
+        </select>
+        <div class="error-message" *ngIf="tournamentForm.get('tournamentType')?.errors && tournamentForm.get('tournamentType')?.touched">
+          Tournament Type is required
+        </div>
+      </div>
+
+      <!-- Start Date -->
+      <div class="field-container ">
+        <label for="startDate">Start Date</label>
+        <p-calendar 
+            inputId="calendar-24h" [showTime]="true"  formControlName="startDate" placeholder="Start Date" />    
+      </div>
+  
+      <!-- End Date -->
+      <div class="field-container ">
+        <label for="endDate">End Date</label>
+        <p-calendar 
+            inputId="calendar-24h" [showTime]="true"  formControlName="endDate" placeholder="End Date" />        
+      </div>
+      <!-- Place -->
+      <div class="field-container ">
+        <label for="placeName">Place Name</label>
+        <input pInputText id="placeName" formControlName="placeName" placeholder="Place Name" />
+        <div class="error-message" *ngIf="tournamentForm.get('placeName')?.errors && tournamentForm.get('placeName')?.touched">
+          Place Name is required
+        </div>
+      </div>
+       <!-- Address  -->
+      <div [formGroup]="addressForm" >
+
+        <!-- Street -->
+        <div class="field-container ">
+          <label for="street">Street</label>
+          <input pInputText id="street" formControlName="street" placeholder="Street Address" />
+          
+        </div>
+
+        <!-- City -->
+        <div class="field-container ">
+          <label for="city">City</label>
+          <input pInputText id="city" formControlName="city" placeholder="City" />
+        </div>
+
+        <!-- Zip Code -->
+        <div class="field-container ">
+          <label for="zip">ZIP Code</label>
+          <input pInputText id="zip" formControlName="zip" placeholder="ZIP Code" />
+        </div>
+
+        <!-- State -->
+        <div class="field-container ">
+          <label for="state">State</label>
+          <input pInputText id="state" formControlName="state" placeholder="State" />
+        </div>
+
+        <!-- Country -->
+        <div class="field-container ">
+          <label for="country">Country</label>
+          <input pInputText id="country" formControlName="country" placeholder="Country" />
+        </div>
+    </div>
+   
+  
+      <div >
+        <p-button label="Submit" icon="pi pi-check" type="submit"></p-button>
+      </div>
+    </form>
+  </div>
+  
