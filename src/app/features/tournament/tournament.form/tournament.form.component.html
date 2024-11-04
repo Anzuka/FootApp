@@ -86,11 +86,21 @@
           <input pInputText id="country" formControlName="country" placeholder="Country" />
         </div>
     </div>
-   
+    
+    <div class="error-message" *ngIf="errorMessages">
+      @for (errorMessage of errorMessages; track $index) {
+       <ul>
+        <li>{{errorMessage}}</li>
+       </ul> 
+      }
+
+    </div>
   
       <div >
         <p-button label="Submit" icon="pi pi-check" type="submit"></p-button>
       </div>
+
+
     </form>
   </div>
   
