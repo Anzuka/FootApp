@@ -6,6 +6,9 @@ import { TournamentService } from '../tools/services/tournament.service';
 import { TournamentCreateModel } from '../tools/models/tournament.create.model';
 import { TournamentStatus } from '../tools/enums/tournament-status';
 import { startBeforeEndDate } from '../../../shared/validators/start-before-end-date';
+import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { noWhitespaceValidator } from '../../../shared/validators/no-whitespace';
 
 @Component({
   selector: 'app-tournament.form',
@@ -16,16 +19,17 @@ import { startBeforeEndDate } from '../../../shared/validators/start-before-end-
 export class TournamentFormComponent {
   tournamentForm!: FormGroup;
   tournamentTypes = Object.values(TournamentType); 
+  errorMessages: string[] = [];
 
-  constructor(private fb: FormBuilder, private _serviceTournament: TournamentService){}
+  constructor(private _router: Router, private fb: FormBuilder, private _serviceTournament: TournamentService){}
   
   ngOnInit(){
     this.tournamentForm = this.fb.group(
       {
-        title: ['', [Validators.required, Validators.minLength(1)]],
+        title: ['', [Validators.required, Validators.minLength(1), noWhitespaceValidator()]],
         startDate: [null],
         endDate: [null],
-        placeName: [null, [Validators.required, Validators.minLength(1)]],
+        placeName: ['', [Validators.required, Validators.minLength(1), noWhitespaceValidator()]],
         address: this.fb.group({
           street: [null],
           city: [null],
@@ -46,10 +50,20 @@ export class TournamentFormComponent {
 
   onSubmit() {
     this.tournamentForm.markAllAsTouched();
+    this.errorMessages.length = 0;
     if(this.tournamentForm.valid){
       let value: TournamentModel = this.tournamentForm.value;
       console.log(value);
-      this._serviceTournament.createOne(mapToTournamentCreateModel(value)).subscribe();
+      this._serviceTournament.createOne(mapToTournamentCreateModel(value)).subscribe({
+        // Change de route
+        next: () => {
+          this._router.navigate(['/tournament/list']);
+        },
+        // Si erreurs
+        error: (error: HttpErrorResponse) => {
+          this.errorMessages = error.error.errors;
+        }
+      });
       
     }else{
       console.log('Form is invalid');
@@ -73,18 +87,3 @@ function mapToTournamentCreateModel(value: TournamentModel): TournamentCreateMod
     'tournamentType': value.tournamentType
   }
 }
-/*{
-  "title": "Football Tournament 2",
-  "startDate": "2024-09-24T16:17:00.328Z",
-  "endDate": "2024-08-24T16:17:00.328Z",
-  "placeName": "FootballPark",
-  "address": {
-    "street": "Rue du Paradis, 21",
-    "city": "Namur",
-    "zip": "5000",
-    "state": "Namur",
-    "country": "Belgique"
-  },
-  "tournamentType": "KNOCKOUT_16",
-  "tournamentStatus": "BUILDING"
-}*/
