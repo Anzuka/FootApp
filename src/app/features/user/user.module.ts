@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import {SharedModule} from '../../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module'
 
 import { UserRoutingModule } from './user-routing.module';
 import {LoginComponent} from './login/login.component';
@@ -13,7 +13,6 @@ import {CalendarModule} from 'primeng/calendar';
 import {ButtonModule} from 'primeng/button';
 import {DividerModule} from 'primeng/divider';
 import {InputTextModule} from 'primeng/inputtext';
-import { FeedbackComponent } from './feedback/feedback.component';
 
 
 @NgModule({
@@ -23,7 +22,6 @@ import { FeedbackComponent } from './feedback/feedback.component';
     RequestNewPasswordComponent,
     RequestNewPasswordConfirmationComponent,
     ResetPasswordComponent,
-    FeedbackComponent,
   ],
   imports: [
     UserRoutingModule,
