@@ -1,0 +1,7 @@
+<div class="feedback-container" [ngClass]="isSuccess ? 'success' : 'error'">
+  <h3 class="feedback-title" [ngClass]="isSuccess ? 'success-title' : 'error-title'">
+    {{ isSuccess ? 'Check Your Email' : 'Oops! Something went wrong.' }}
+  </h3>
+  <p class="feedback-message">{{ message }}</p>
+  <button class="feedback-button" (click)="onButtonClick()">{{ buttonText }}</button>
+</div>
