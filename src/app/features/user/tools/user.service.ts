@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {UserRegisterModel} from '../sign-up/models/user.register.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,6 @@ export class UserService {
   private apiUrl: string = "http://localhost:8080";
 
   constructor(private _http: HttpClient) { }
-
-
-
 
   login(username: string, password: string): Observable<any> {
 
@@ -34,6 +32,10 @@ export class UserService {
   resetPassword(token: string, password: string, confirmPassword: string): Observable<any> {
     const data = { password: password, confirmPassword: confirmPassword }; // Assurez-vous que ces champs correspondent à PasswordResetForm
     return this._http.post(`${this.apiUrl}/reset-password?token=${token}`, data);
+  }
+
+  requestNewPasswordToken(url: string): Observable<any> {
+    return this._http.get(url, {});
   }
 
 
