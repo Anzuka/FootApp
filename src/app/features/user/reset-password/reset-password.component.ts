@@ -3,6 +3,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../tools/user.service';
 import {passwordStrengthValidator} from '../tools/validators/password-strength-validator';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-reset-password',
@@ -16,6 +17,8 @@ export class ResetPasswordComponent implements OnInit {
   showFeedback: boolean = false;
   feedbackMessage: string = '';
   isSuccess: boolean = true;
+  buttonText: string = '';
+  buttonAction: () => void = () => {};
 
   constructor(
       private _fb: FormBuilder,
@@ -59,29 +62,57 @@ export class ResetPasswordComponent implements OnInit {
     if (this.newPasswordForm.valid) {
       const newPassword = this.newPasswordForm.value.newPassword;
       const confirmPassword = this.newPasswordForm.value.confirmPassword;
-      //console.log("New Password:", newPassword);
-      //console.log("Confirm Password:", confirmPassword);
+
 
       this._userService.resetPassword(this.token, newPassword, confirmPassword).subscribe({
         next: () => {
           this.feedbackMessage = "Thank you! Your password has been successfully modified. You can now use it to connect into your favorite app.";
           this.isSuccess = true;
           this.showFeedback = true;
-          //console.log(result)
-          //alert("Your password has been updated successfully.");
-          //this._router.navigate(["/user/login"]);
+          this.buttonText = 'Back to login';
+          this.buttonAction = ()=>{
+            this._router.navigate(['user/login']);
+          }
+
         },
-        error: (data) => {
-          this.feedbackMessage = data.error?.error || 'An unexpected error occurred. Please try again.';
+        error: (error: HttpErrorResponse) => {
+          console.log('Contenu de error.error : ', error.error); // Debug pour l'erreur
+
+          if (error.error && typeof error.error === 'object' && error.error.error) {
+            this.feedbackMessage = error.error.error;
+          } else {
+            this.feedbackMessage = 'An unexpected error occurred. Please try again.';
+          }
+
           this.isSuccess = false;
           this.showFeedback = true;
-          //console.log(result.error)
-          //this.errorMessage = error.error || 'Password reset failed. Please try again.';
+          this.buttonText = 'Request new password';
+          this.buttonAction = () => {
+            if (error.error.url) {
+              this._userService.requestNewPasswordToken(error.error.url).subscribe({
+                next: () => {
+                  this.feedbackMessage = "We've just sent you an email with instructions to reset your password. Please check your inbox.";
+                  this.isSuccess = true;
+                  this.showFeedback = true;
+                  this.buttonText = 'Back to login';
+                  this.buttonAction = () => {
+                    this._router.navigate(['user/login']);
+                  };
+                },
+                error: (requestError: HttpErrorResponse) => {
+                  console.error("Error requesting new token: ", requestError);
+                  this.feedbackMessage = 'Unable to request a new password reset token. Please try again later.';
+                  this.isSuccess = false;
+                  this.showFeedback = true;
+                  this.buttonText = 'Retry';
+                }
+              });
+            } else {
+              this._router.navigate(['/user/request-new-password']);
+            }
+          };
         }
       });
-
-      //this._router.navigate(['/user/login']); // Redirige vers la page de connexion après le succès
     }
   }
-
 }

@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../tools/user.service';
 import {HttpErrorResponse} from '@angular/common/http';
 
+
 @Component({
   selector: 'app-request-new-password',
   templateUrl: './request-new-password.component.html',
@@ -12,7 +13,12 @@ import {HttpErrorResponse} from '@angular/common/http';
 export class RequestNewPasswordComponent {
   requestNewPasswordForm: FormGroup;
   captchaResolved = false;
-  errorMessage: string = '';
+  showFeedback = false;
+  feedbackMessage: string = '';
+  isSuccess: boolean = true;
+  buttonText: string = '';
+  buttonAction: () => void = () => {};
+
 
   constructor(
     private _fb: FormBuilder,
@@ -35,18 +41,34 @@ export class RequestNewPasswordComponent {
 
       this._userService.requestPassword(email).subscribe({
         next: (result) => {
-          console.log('check your mails', result);
-          this._router.navigate(["/user/request-new-password-confirmation"]);
+          this.isSuccess = true;
+          this.feedbackMessage = "We've just sent you an email with instructions to reset your password. Please check your inbox and follow the link to complete the process.";
+          this.showFeedback = true;
+          this.buttonText = 'Back to login';
+          this.buttonAction = () => {
+            this._router.navigate(['/login']);
+          }
+
 
         },
         error: (error: HttpErrorResponse) => {
           console.error('Erreur de request password : ', error);
+          console.log('Contenu de error.error : ', error.error); // Ajoute cette ligne
 
-          if (error.error) {
-            this.errorMessage = error.error;
+          // Assigne le message d'erreur correctement
+          if (error.error && typeof error.error === 'object' && error.error.error) {
+            this.feedbackMessage = error.error.error;
           } else {
-            this.errorMessage = 'Erreur de request password , veuillez réessayer.'; // Message générique en cas de problème
+            this.feedbackMessage = 'An error occurred while requesting a password reset. Please try again.';
           }
+
+          this.isSuccess = false;
+          this.showFeedback = true;
+          this.buttonText = 'Retry';
+          this.buttonAction = () => {
+            this._router.navigate(['/user/request-new-password']);
+          }
+
         }
       })
     }
@@ -55,5 +77,4 @@ export class RequestNewPasswordComponent {
   onCaptchaResolved(captchaResponse: string | null) {
     this.captchaResolved = !!captchaResponse; // Met à true si le reCAPTCHA est résolu
   }
-
 }
