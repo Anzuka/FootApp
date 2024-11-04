@@ -8,6 +8,7 @@ import { TournamentStatus } from '../tools/enums/tournament-status';
 import { startBeforeEndDate } from '../../../shared/validators/start-before-end-date';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { noWhitespaceValidator } from '../../../shared/validators/no-whitespace';
 
 @Component({
   selector: 'app-tournament.form',
@@ -25,10 +26,10 @@ export class TournamentFormComponent {
   ngOnInit(){
     this.tournamentForm = this.fb.group(
       {
-        title: ['', [Validators.required, Validators.minLength(1)]],
+        title: ['', [Validators.required, Validators.minLength(1), noWhitespaceValidator()]],
         startDate: [null],
         endDate: [null],
-        placeName: ['', [Validators.required, Validators.minLength(1)]],
+        placeName: ['', [Validators.required, Validators.minLength(1), noWhitespaceValidator()]],
         address: this.fb.group({
           street: [null],
           city: [null],

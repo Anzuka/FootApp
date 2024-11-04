@@ -86,7 +86,8 @@
           <input pInputText id="country" formControlName="country" placeholder="Country" />
         </div>
     </div>
-    
+
+    <!-- Errors from Server -->
     <div class="error-message" *ngIf="errorMessages">
       @for (errorMessage of errorMessages; track $index) {
        <ul>
