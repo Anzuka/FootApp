@@ -16,7 +16,7 @@
               }
               <p><strong>Tournament Type:</strong> {{ tournament.tournamentType }}</p>
               <p><strong>Status:</strong> 
-                <span class="status {{ tournament.tournamentStatus | lowercase }}">
+                <span class="status {{ tournament.tournamentStatus.toString()| lowercase }}">
                   {{ tournament.tournamentStatus }}
                 </span>
               </p>

@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TournamentService } from '../tools/services/tournament.service';
 import { TournamentCreateModel } from '../tools/models/tournament.create.model';
 import { TournamentStatus } from '../tools/enums/tournament-status';
+import { startBeforeEndDate } from '../../../shared/validators/start-before-end-date';
 
 @Component({
   selector: 'app-tournament.form',
@@ -19,20 +20,23 @@ export class TournamentFormComponent {
   constructor(private fb: FormBuilder, private _serviceTournament: TournamentService){}
   
   ngOnInit(){
-    this.tournamentForm = this.fb.group({
-      title: [null, Validators.required],
-      startDate: [null],
-      endDate: [null],
-      placeName: [null, Validators.required],
-      address: this.fb.group({
-        street: [null],
-        city: [null],
-        zip: [null],
-        state: [null],
-        country: [null]
-      }),
-      tournamentType: [null, Validators.required],
-    });
+    this.tournamentForm = this.fb.group(
+      {
+        title: ['', [Validators.required, Validators.minLength(1)]],
+        startDate: [null],
+        endDate: [null],
+        placeName: [null, [Validators.required, Validators.minLength(1)]],
+        address: this.fb.group({
+          street: [null],
+          city: [null],
+          zip: [null],
+          state: [null],
+          country: [null]
+        }),
+        tournamentType: [null, Validators.required],
+    }, 
+    {validators: [startBeforeEndDate()]}
+  );
   }
 
 
@@ -41,6 +45,7 @@ export class TournamentFormComponent {
   }
 
   onSubmit() {
+    this.tournamentForm.markAllAsTouched();
     if(this.tournamentForm.valid){
       let value: TournamentModel = this.tournamentForm.value;
       console.log(value);

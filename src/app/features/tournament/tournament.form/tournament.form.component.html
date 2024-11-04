@@ -40,6 +40,10 @@
         <p-calendar 
             inputId="calendar-24h" [showTime]="true"  formControlName="endDate" placeholder="End Date" />        
       </div>
+      <div class="error-message" *ngIf="tournamentForm.hasError('startBeforeEndDate')">
+        Start Date must be before End Date
+      </div>
+      
       <!-- Place -->
       <div class="field-container ">
         <label for="placeName">Place Name</label>
