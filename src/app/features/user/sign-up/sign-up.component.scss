@@ -1,0 +1,66 @@
+// Variables de couleur
+$primary-color: #3498db;
+$error-color: #e74c3c;
+$input-border-color: #ccc;
+$input-border-focus: $primary-color;
+$button-color: $primary-color;
+$button-hover-color: darken($primary-color, 10%);
+$label-color: #333;
+$background-color: #f9f9f9;
+
+// Style du formulaire
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: $background-color;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  label {
+    color: $label-color;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+  }
+
+  input {
+    padding: 0.5rem;
+    border: 1px solid $input-border-color;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%;
+
+    &:focus {
+      border-color: $input-border-focus;
+      outline: none;
+    }
+  }
+
+  small {
+    color: $error-color;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+  }
+
+  button[type="submit"] {
+    background-color: $button-color;
+    color: #fff;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $button-hover-color;
+    }
+  }
+}
+
+// Feedback styling
+app-feedback {
+  margin-top: 1rem;
+}

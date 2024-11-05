@@ -1,4 +1,7 @@
 export interface UserRegisterModel {
+    username: string,
+    password: string,
+    confirmPassword: string,
     firstname: string,
     lastname: string,
     email: string,
@@ -8,8 +11,5 @@ export interface UserRegisterModel {
     city?: string,
     zip: string,
     state?: string,
-    country?: string,
-    username: string,
-    password: string,
-    confirmPassword: string
+    country?: string
 }
