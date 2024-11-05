@@ -3,6 +3,9 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import { UserService } from '../tools/user.service';
 import { UserRegisterModel } from './models/user.register.model';
 import { passwordStrengthValidator } from '../tools/validators/password-strength-validator';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {ApiResponse} from '../tools/models/api-response';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,13 +17,16 @@ export class SignUpComponent {
   feedbackMessage: string = '';
   isFeedbackSuccess: boolean = true;
   showFeedback: boolean = false;
+  buttonText: string = '';
+  buttonAction: () => void = () => {};
 
   constructor(
-      private fb: FormBuilder,
-      private userService: UserService
+      private _fb: FormBuilder,
+      private _userService: UserService,
+      private _router: Router
   ) {
     // Initialisation du formulaire avec les validations nécessaires
-    this.signupForm = this.fb.group({
+    this.signupForm = this._fb.group({
       username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       password: ['', [Validators.required, passwordStrengthValidator()]],
       confirmPassword: ['', Validators.required],
@@ -54,24 +60,40 @@ export class SignUpComponent {
     // Récupération des données du formulaire
     const userData: UserRegisterModel = this.signupForm.value;
 
-    this.userService.register(userData).subscribe({
-      next: (response) => {
+    this._userService.register(userData).subscribe({
+      next: (response: ApiResponse) => {
         console.log(response);
-        this.feedbackMessage = "Merci ! Vous êtes bien enregistré. Veuillez vérifier votre email pour confirmer votre compte.";
+        this.feedbackMessage = response.message;
         this.isFeedbackSuccess = true;
         this.showFeedback = true;
+        this.buttonText = 'Back to login';
+        this.buttonAction = () => {
+          this._router.navigate(['user/login']);
+        };
       },
-      error: (err) => {
-        console.error(err);
-        this.feedbackMessage = err.error?.message || "Une erreur s'est produite lors de l'enregistrement.";
+      error: (err: HttpErrorResponse) => {
+        console.log('Contenu de error.error : ', err.error); // Debug pour l'erreur
+
+        if (err.error && typeof err.error === 'object' && err.error.error) {
+          this.feedbackMessage = err.error.error;
+        } else if (err.error && typeof err.error === 'object' && err.error.errors) {
+          console.log("error valid = " , err.error.errors);
+          this.feedbackMessage = err.error.errors[0];
+        }else {
+          this.feedbackMessage ="Une erreur s'est produite lors de l'enregistrement.";
+        }
         this.isFeedbackSuccess = false;
         this.showFeedback = true;
+        this.buttonText = 'Back to form';
+        this.buttonAction = () => {
+          this.showFeedback = false;
+        };
       }
     });
   }
 
-  resetForm() {
-    this.signupForm.reset();
-    this.showFeedback = false;
-  }
+  //resetForm() {
+   // this.signupForm.reset();
+   // this.showFeedback = false;
+  //}
 }
