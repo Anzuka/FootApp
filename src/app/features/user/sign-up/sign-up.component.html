@@ -1,4 +1,6 @@
-<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+<div class="container">
+  <form *ngIf="!showFeedback" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
     <!-- Nom d'utilisateur -->
     <div>
         <label for="username">Nom d'utilisateur</label>
@@ -106,12 +108,13 @@
 
     <!-- Bouton d'inscription -->
     <button type="submit">S'inscrire</button>
-</form>
+  </form>
 
-<!-- Feedback -->
-<app-feedback *ngIf="showFeedback"
-              [message]="feedbackMessage"
-              [isSuccess]="isFeedbackSuccess"
-              buttonText="Retour"
-              (buttonClicked)="resetForm()">
-</app-feedback>
+  <!-- Feedback -->
+  <app-feedback *ngIf="showFeedback"
+                [message]="feedbackMessage"
+                [isSuccess]="isFeedbackSuccess"
+                [buttonText]="buttonText"
+                (buttonClicked)="buttonAction()">
+  </app-feedback>
+</div>
