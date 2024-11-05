@@ -5,7 +5,7 @@ import { TournamentInfoComponent } from './tournament-info/tournament-info.compo
 import { TournamentFormComponent } from './tournament.form/tournament.form.component';
 
 const routes: Routes = [
-    { path:'list', component: TournamentListComponent},
+    { path:'organize', component: TournamentListComponent},
     { path: 'new', component: TournamentFormComponent},
     { path: 'details/:id', component: TournamentInfoComponent},
 ]

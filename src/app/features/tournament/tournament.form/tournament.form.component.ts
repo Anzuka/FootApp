@@ -57,7 +57,7 @@ export class TournamentFormComponent {
       this._serviceTournament.createOne(mapToTournamentCreateModel(value)).subscribe({
         // Change de route
         next: () => {
-          this._router.navigate(['/tournament/list']);
+          this._router.navigate(['/tournament/organize']);
         },
         // Si erreurs
         error: (error: HttpErrorResponse) => {

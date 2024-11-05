@@ -13,7 +13,7 @@ export class HeaderComponent {
       {
         label: 'Tournament',
         items: [
-          { label: 'My Tournaments', icon: 'pi pi-fw pi-plus', url: '/tournament/list' },
+          { label: 'My Tournaments', icon: 'pi pi-fw pi-plus', url: '/tournament/organize' },
           { label: 'Open', icon: 'pi pi-fw pi-external-link' },
           { label: 'Quit', icon: 'pi pi-fw pi-times' }
         ]
