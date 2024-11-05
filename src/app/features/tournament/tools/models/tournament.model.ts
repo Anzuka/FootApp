@@ -10,6 +10,7 @@ export interface TournamentModel {
   address?: Address;
   tournamentType: TournamentType;
   tournamentStatus: TournamentStatus;
+  organizerId: number;
 }
 
 export interface Address {
