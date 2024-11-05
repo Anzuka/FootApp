@@ -1,84 +1,117 @@
-<div class="container">
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-box">
-    <h1 class="titleform">Register</h1>
-    <hr>
-    <!-- Username -->
-    <div class="field-container ">
-      <label for="username">Username</label>
-      <input pInputText id="username" formControlName="username" placeholder="Username" />
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <!-- Nom d'utilisateur -->
+    <div>
+        <label for="username">Nom d'utilisateur</label>
+        <input id="username" type="text" formControlName="username">
+        <div *ngIf="signupForm.get('username')?.touched && signupForm.get('username')?.invalid">
+            <small *ngIf="signupForm.get('username')?.errors?.['required']">Le nom d'utilisateur est requis.</small>
+            <small *ngIf="signupForm.get('username')?.errors?.['minlength']">Minimum 3 caractères.</small>
+            <small *ngIf="signupForm.get('username')?.errors?.['maxlength']">Maximum 50 caractères.</small>
+        </div>
     </div>
 
-    <!-- Password -->
-    <div class="field-container ">
-      <label for="password">Password</label>
-      <input type="password"s pPassword id="password" formControlName="password" placeholder="Password" />
+    <!-- Mot de passe -->
+    <div>
+        <label for="password">Mot de passe</label>
+        <input id="password" type="password" formControlName="password">
+        <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid">
+            <small *ngIf="signupForm.get('password')?.errors?.['required']">Le mot de passe est requis.</small>
+            <small *ngIf="signupForm.get('password')?.errors?.['passwordStrength']">Mot de passe faible.</small>
+        </div>
     </div>
 
-    <!-- Confirm Password -->
-    <div class="field-container ">
-      <label for="confirmPassword">Confirm Password</label>
-      <input type="password" pPassword id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm Password" />
+    <!-- Confirmation du mot de passe -->
+    <div>
+        <label for="confirmPassword">Confirmation du mot de passe</label>
+        <input id="confirmPassword" type="password" formControlName="confirmPassword">
+      <div *ngIf="signupForm.hasError('passwordMismatch') && signupForm.get('confirmPassword')?.dirty" class="error-message">
+        <small>Passwords do not match</small>
+      </div>
     </div>
-    <hr>
-    <!-- First Name -->
-    <div class="field-container ">
-      <label for="firstname">First Name</label>
-      <input pInputText id="firstname" formControlName="firstname" placeholder="First Name" />
+    <!-- Prénom -->
+    <div>
+        <label for="firstname">Prénom</label>
+        <input id="firstname" type="text" formControlName="firstname">
+        <div *ngIf="signupForm.get('firstname')?.touched && signupForm.get('firstname')?.invalid">
+            <small *ngIf="signupForm.get('firstname')?.errors?.['required']">Le prénom est requis.</small>
+        </div>
     </div>
 
-    <!-- Last Name -->
-    <div class="field-container ">
-      <label for="lastname">Last Name</label>
-      <input pInputText id="lastname" formControlName="lastname" placeholder="Last Name" />
+    <!-- Nom -->
+    <div>
+        <label for="lastname">Nom</label>
+        <input id="lastname" type="text" formControlName="lastname">
+        <div *ngIf="signupForm.get('lastname')?.touched && signupForm.get('lastname')?.invalid">
+            <small *ngIf="signupForm.get('lastname')?.errors?.['required']">Le nom est requis.</small>
+        </div>
     </div>
 
     <!-- Email -->
-    <div class="field-container ">
-      <label for="email">Email</label>
-      <input pInputText id="email" formControlName="email" placeholder="Email Address" />
+    <div>
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email">
+        <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid">
+            <small *ngIf="signupForm.get('email')?.errors?.['required']">L'email est requis.</small>
+            <small *ngIf="signupForm.get('email')?.errors?.['email']">L'email n'est pas valide.</small>
+        </div>
     </div>
 
-    <!-- Birthdate -->
-    <div class="field-container ">
-      <label for="birthdate">Birthdate</label>
-      <p-calendar dateFormat="dd.mm.yy" formControlName="birthdate" [maxDate]="maxDate"/> 
-    </div>
-    <hr>
-
-    <!-- Address  -->
-    <!-- Street -->
-    <div class="field-container ">
-      <label for="street">Street</label>
-      <input pInputText id="street" formControlName="street" placeholder="Street Address" />
+    <!-- Date de naissance -->
+    <div>
+        <label for="birthdate">Date de naissance</label>
+        <input id="birthdate" type="date" formControlName="birthdate">
+        <div *ngIf="signupForm.get('birthdate')?.touched && signupForm.get('birthdate')?.invalid">
+            <small *ngIf="signupForm.get('birthdate')?.errors?.['required']">La date de naissance est requise.</small>
+        </div>
     </div>
 
-    <!-- City -->
-    <div class="field-container ">
-      <label for="city">City</label>
-      <input pInputText id="city" formControlName="city" placeholder="City" />
+    <!-- Téléphone -->
+    <div>
+        <label for="phoneNumber">Téléphone</label>
+        <input id="phoneNumber" type="text" formControlName="phoneNumber">
+        <div *ngIf="signupForm.get('phoneNumber')?.touched && signupForm.get('phoneNumber')?.invalid">
+            <!--<small *ngIf="signupForm.get('phoneNumber')?.errors?.pattern">Le numéro de téléphone est invalide.</small>-->
+        </div>
     </div>
 
-    <!-- Zip Code -->
-    <div class="field-container ">
-      <label for="zip">ZIP Code</label>
-      <input pInputText id="zip" formControlName="zip" placeholder="ZIP Code" />
+    <!-- Adresse, ville, état, code postal, pays -->
+    <div>
+        <label for="street">Adresse</label>
+        <input id="street" type="text" formControlName="street">
     </div>
 
-    <!-- State -->
-    <div class="field-container ">
-      <label for="state">State</label>
-      <input pInputText id="state" formControlName="state" placeholder="State" />
+    <div>
+        <label for="city">Ville</label>
+        <input id="city" type="text" formControlName="city">
     </div>
 
-    <!-- Country -->
-    <div class="field-container ">
-      <label for="country">Country</label>
-      <input pInputText id="country" formControlName="country" placeholder="Country" />
+    <div>
+        <label for="zip">Code Postal</label>
+        <input id="zip" type="text" formControlName="zip">
+        <div *ngIf="signupForm.get('zip')?.touched && signupForm.get('zip')?.invalid">
+            <small *ngIf="signupForm.get('zip')?.errors?.['required']">Le code postal est requis.</small>
+        </div>
     </div>
 
-    <!-- Submit Button -->
-    <div >
-      <p-button label="Submit" icon="pi pi-check" type="submit"></p-button>
+    <div>
+        <label for="state">État</label>
+        <input id="state" type="text" formControlName="state">
     </div>
-  </form>
-</div>
+
+    <div>
+        <label for="country">Pays</label>
+        <input id="country" type="text" formControlName="country">
+    </div>
+
+
+    <!-- Bouton d'inscription -->
+    <button type="submit">S'inscrire</button>
+</form>
+
+<!-- Feedback -->
+<app-feedback *ngIf="showFeedback"
+              [message]="feedbackMessage"
+              [isSuccess]="isFeedbackSuccess"
+              buttonText="Retour"
+              (buttonClicked)="resetForm()">
+</app-feedback>
