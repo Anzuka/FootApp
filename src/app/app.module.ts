@@ -23,6 +23,7 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
     ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
