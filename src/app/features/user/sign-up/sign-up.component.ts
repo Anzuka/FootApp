@@ -3,7 +3,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import { UserService } from '../tools/user.service';
 import { UserRegisterModel } from './models/user.register.model';
 import { passwordStrengthValidator } from '../tools/validators/password-strength-validator';
-import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse} from '@angular/common/http';
 import {ApiResponse} from '../tools/models/api-response';
 import {Router} from '@angular/router';
 
@@ -18,12 +18,13 @@ export class SignUpComponent {
   isFeedbackSuccess: boolean = true;
   showFeedback: boolean = false;
   buttonText: string = '';
-  buttonAction: () => void = () => {};
+  buttonAction: () => void = () => {
+  };
 
   constructor(
-      private _fb: FormBuilder,
-      private _userService: UserService,
-      private _router: Router
+    private _fb: FormBuilder,
+    private _userService: UserService,
+    private _router: Router
   ) {
     // Initialisation du formulaire avec les validations nécessaires
     this.signupForm = this._fb.group({
@@ -40,13 +41,13 @@ export class SignUpComponent {
       zip: ['', Validators.required],
       state: [''],
       country: [''],
-    }, { validators: this.passwordsMatchValidator });
+    }, {validators: this.passwordsMatchValidator});
   }
 
   passwordsMatchValidator(form: AbstractControl): { [key: string]: boolean } | null {
     const password = form.get('password')?.value;
     const confirmPassword = form.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { passwordMismatch: true };
+    return password === confirmPassword ? null : {passwordMismatch: true};
   }
 
   onSubmit() {
@@ -77,10 +78,10 @@ export class SignUpComponent {
         if (err.error && typeof err.error === 'object' && err.error.error) {
           this.feedbackMessage = err.error.error;
         } else if (err.error && typeof err.error === 'object' && err.error.errors) {
-          console.log("error valid = " , err.error.errors);
+          console.log("error valid = ", err.error.errors);
           this.feedbackMessage = err.error.errors[0];
-        }else {
-          this.feedbackMessage ="Une erreur s'est produite lors de l'enregistrement.";
+        } else {
+          this.feedbackMessage = "Une erreur s'est produite lors de l'enregistrement.";
         }
         this.isFeedbackSuccess = false;
         this.showFeedback = true;
@@ -93,7 +94,7 @@ export class SignUpComponent {
   }
 
   //resetForm() {
-   // this.signupForm.reset();
-   // this.showFeedback = false;
+  // this.signupForm.reset();
+  // this.showFeedback = false;
   //}
 }
