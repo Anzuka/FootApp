@@ -1,0 +1,16 @@
+<div class="confirm-account-container" *ngIf="showFeedback">
+  <!-- Utilisation du FeedbackComponent avec les messages du backend -->
+  <app-feedback
+    [message]="feedbackMessage"
+    [isSuccess]="isFeedbackSuccess"
+    [buttonText]="buttonText"
+    (buttonClicked)="buttonAction()">
+
+  </app-feedback>
+</div>
+
+<div *ngIf="!showFeedback">
+  <!-- Optionnel : Un message de chargement ou une icône d'attente peut être affiché ici -->
+  <p>Validating your account...</p>
+</div>
+
