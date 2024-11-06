@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { AuthService } from '../../auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -7,39 +9,46 @@ import { MenuItem } from 'primeng/api';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+
   items: MenuItem[] = [];
+  isConnected!: Observable<boolean>;
+  username!: Observable<string | undefined>;
+
+  constructor(private _authService: AuthService){}
+
   ngOnInit() {
+    this.isConnected = this._authService.isLoggedIn();
+    this.username = this._authService.getUsernameObservable();
+    
     this.items = [
       {
         label: 'Tournament',
         items: [
           { label: 'My Tournaments', icon: 'pi pi-fw pi-plus', url: '/tournament/list' },
-          { label: 'Open', icon: 'pi pi-fw pi-external-link' },
-          { label: 'Quit', icon: 'pi pi-fw pi-times' }
+          { label: 'My Participations', icon: 'pi pi-fw pi-sign-in' },
+          { label: 'All Tournaments', icon: 'pi pi-fw pi-search' }
         ]
       },
       {
-        label: 'Edit',
+        label: 'Team',
         items: [
-          { label: 'Undo', icon: 'pi pi-fw pi-undo' },
-          { label: 'Redo', icon: 'pi pi-fw pi-repeat' }
+          { label: 'My Teams'},
+          { label: 'All Teams'}
         ]
       },
       {
-        label: 'Help',
+        label: 'Favorites',
         items: [
-          { label: 'Contents' },
-          { label: 'Search', icon: 'pi pi-fw pi-search' }
+          { label: 'My Favorites Matchs' },
+          { label: 'My Favorites Teams' },
+          { label: 'My Moderates Matchs' }
         ]
-      },
-      {
-        label: 'test',
-        items: [
-          { label: 'test' },
-          { label: 'test', icon: 'pi pi-fw pi-search' }
-        ]
-      },
+      }
     ];
+  }
+
+  logout() {
+    this._authService.logout();
   }
 
 }
