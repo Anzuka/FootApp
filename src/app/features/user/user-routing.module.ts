@@ -4,12 +4,14 @@ import {LoginComponent} from './login/login.component';
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {RequestNewPasswordComponent} from './request-new-password/request-new-password.component';
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
+import {ConfirmAccountComponent} from './confirm-account/confirm-account.component';
 
 const routes: Routes = [
   { path: 'user/login', component: LoginComponent},
   { path: 'user/signup', component: SignUpComponent},
   { path: 'user/request-new-password', component: RequestNewPasswordComponent},
   { path: 'user/reset-password', component: ResetPasswordComponent},
+  { path: 'user/confirm-account', component: ConfirmAccountComponent},
 
 ];
 

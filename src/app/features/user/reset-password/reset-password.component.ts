@@ -89,7 +89,7 @@ export class ResetPasswordComponent implements OnInit {
           this.buttonText = 'Request new password';
           this.buttonAction = () => {
             if (error.error.url) {
-              this._userService.requestNewPasswordToken(error.error.url).subscribe({
+              this._userService.requestNewLink(error.error.url).subscribe({
                 next: () => {
                   this.feedbackMessage = "We've just sent you an email with instructions to reset your password. Please check your inbox.";
                   this.isSuccess = true;

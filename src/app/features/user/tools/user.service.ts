@@ -17,6 +17,16 @@ export class UserService {
     return this._http.post<ApiResponse>(`${this.apiUrl}/register`, user);
   }
 
+  confirmAccount(token: string): Observable<ApiResponse> {
+    return this._http.get<ApiResponse>(`${this.apiUrl}/registrationConfirm`, {
+      params: { token }
+    });
+  }
+
+  requestNewLink(url: string): Observable<any> {
+    return this._http.get(url, {});
+  }
+
   login(username: string, password: string): Observable<any> {
 
     const loginData = {
@@ -38,10 +48,5 @@ export class UserService {
     const data = { password: password, confirmPassword: confirmPassword }; // Assurez-vous que ces champs correspondent à PasswordResetForm
     return this._http.post(`${this.apiUrl}/reset-password?token=${token}`, data);
   }
-
-  requestNewPasswordToken(url: string): Observable<any> {
-    return this._http.get(url, {});
-  }
-
 
 }
