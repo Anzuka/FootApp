@@ -60,7 +60,7 @@ export class TournamentFormComponent {
           this._router.navigate(['/tournament/list']);
         },
         // Si erreurs
-        error: (error: HttpErrorResponse) => {
+        error: (error: HttpErrorResponse) => {          
           this.errorMessages = error.error.errors;
         }
       });
