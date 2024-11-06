@@ -21,7 +21,7 @@ export class TournamentListComponent {
   }
 
   loadTournaments(): void {
-    this._tournamentService.getAll().subscribe((data: TournamentModel[]) => {
+    this._tournamentService.getAllOrganizeTournament().subscribe((data: TournamentModel[]) => {
       console.log(data);
       this.tournaments = data.map(tournament => this.transformToCardModel(tournament));
     });

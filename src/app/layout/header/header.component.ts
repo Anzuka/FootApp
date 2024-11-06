@@ -24,9 +24,9 @@ export class HeaderComponent {
       {
         label: 'Tournament',
         items: [
-          { label: 'My Tournaments', icon: 'pi pi-fw pi-plus', url: '/tournament/list' },
+          { label: 'My Tournaments', icon: 'pi pi-fw pi-plus', url: '/tournament/organize' },
           { label: 'My Participations', icon: 'pi pi-fw pi-sign-in' },
-          { label: 'All Tournaments', icon: 'pi pi-fw pi-search' }
+          { label: 'All Tournaments', icon: 'pi pi-fw pi-search', url: '/tournament/search' }
         ]
       },
       {

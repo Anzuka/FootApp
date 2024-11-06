@@ -6,13 +6,13 @@ import { TournamentFormComponent } from './tournament.form/tournament.form.compo
 import { AuthGuard } from '../../core/guards/auth.guard';
 
 const routes: Routes = [
-    { path:'list', component: TournamentListComponent},
+    { path:'organize', component: TournamentListComponent},
     { 
         path: 'new', 
-        component: TournamentFormComponent, 
+        component: TournamentFormComponent,         
         canActivate: [AuthGuard] // Protects the 'new' route
     },
-        { path: 'details/:id', component: TournamentInfoComponent},
+    { path: 'details/:id', component: TournamentInfoComponent},
 ]
 
 @NgModule({

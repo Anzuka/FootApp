@@ -23,4 +23,9 @@ export class TournamentService {
   createOne(tournament: TournamentCreateModel): Observable<void>{
     return this.http.post<void>(this._tournamentEndPoint, tournament);
   }
+
+  getAllOrganizeTournament(): Observable<TournamentModel[]> {
+    return this.http.get<TournamentModel[]> (`${this._tournamentEndPoint}/organize`);
+
+  }
 }
