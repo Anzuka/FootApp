@@ -12,6 +12,7 @@ import {CalendarModule} from 'primeng/calendar';
 import {ButtonModule} from 'primeng/button';
 import {DividerModule} from 'primeng/divider';
 import {InputTextModule} from 'primeng/inputtext';
+import { ConfirmAccountComponent } from './confirm-account/confirm-account.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import {InputTextModule} from 'primeng/inputtext';
     SignUpComponent,
     RequestNewPasswordComponent,
     ResetPasswordComponent,
+    ConfirmAccountComponent,
   ],
   imports: [
     UserRoutingModule,

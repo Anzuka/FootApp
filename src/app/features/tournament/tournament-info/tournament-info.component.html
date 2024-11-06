@@ -2,7 +2,10 @@
     <div class="tournament-card">
         @if(tournament){
             <h2 class="tournament-title">{{ tournament.title }}</h2>
-  
+            <div *ngIf="(isLoggedIn | async) && canEdit()">
+              <button (click)="deleteTournament()">Delete Tournament</button>
+              <button (click)="changeTournamentStatus()">Change Status</button>
+            </div>
             <div class="tournament-info">
               <p><strong>Start Date:</strong> {{ tournament.startDate | date: 'dd MMMM yyyy, HH:mm' }}</p>
               <p><strong>End Date:</strong> {{ tournament.endDate | date: 'dd MMMM yyyy, HH:mm' }}</p>

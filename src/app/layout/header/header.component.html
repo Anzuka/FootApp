@@ -1,7 +1,16 @@
 
-<p-menubar [model]="items" >
+<p-menubar [model]="items" class="nav-bar">
+    <ng-template pTemplate="start"> <a routerLink="/">
+        <img src="assets/logo-foot-app.ico" width="40" height="40" />
+
+    </a>
+    </ng-template>
     <ng-template pTemplate="end">
-        <p-button label="connection" routerLink="/user/login"/>
+        @if(!(isConnected | async)){
+            <p-button label="connection" routerLink="/user/login"/>
+        }@else {
+         <p>Connecté ({{username | async}}) / <a href="/" (click)="logout()">Logout </a></p>
+        }
     </ng-template>
 </p-menubar>
 

@@ -4,6 +4,8 @@ import { TournamentStatus } from '../tools/enums/tournament-status';
 import { TournamentService } from '../tools/services/tournament.service';
 import { ActivatedRoute } from '@angular/router';
 import { TournamentModel } from '../tools/models/tournament.model';
+import { AuthService } from '../../../auth.service';
+import { Observable } from 'rxjs';
 
 interface Address {
   street: string;
@@ -29,12 +31,20 @@ interface TournamentDetailModel {
   styleUrls: ['./tournament-info.component.scss']
 })
 export class TournamentInfoComponent implements OnInit {
+changeTournamentStatus() {
+throw new Error('Method not implemented.');
+}
+deleteTournament() {
+throw new Error('Method not implemented.');
+}
 
   tournament?: TournamentModel;
+  isLoggedIn : Observable<boolean>;
 
 
-  constructor (private route: ActivatedRoute, private _tournamentService: TournamentService) { 
 
+  constructor (private route: ActivatedRoute, private _tournamentService: TournamentService, private _authService: AuthService) { 
+    this.isLoggedIn = _authService.isLoggedIn();
   }
 
   ngOnInit (): void {
@@ -42,5 +52,10 @@ export class TournamentInfoComponent implements OnInit {
     this._tournamentService.getById(id).subscribe(data => {this.tournament = data;
       console.log(data);
     });
+  }
+
+  canEdit() : boolean | undefined {
+    
+    return this.tournament && this.tournament.organizerId === this._authService.getUserId();
   }
 }
