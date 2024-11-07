@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { DetailsDisplayComponent } from './details.display/details.display.component';
 
 
 
 @NgModule({
   declarations: [
-    FeedbackComponent
+    FeedbackComponent, 
+    DetailsDisplayComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +20,8 @@ import { FeedbackComponent } from './feedback/feedback.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    FeedbackComponent
-  ]
+    FeedbackComponent,
+    DetailsDisplayComponent
+    ]
 })
 export class SharedModule { }

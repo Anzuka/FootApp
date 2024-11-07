@@ -1,0 +1,23 @@
+<div class="info-table">
+    <div class="header">
+        <span>{{headerName}}</span>
+      </div>
+    @for (detail of detailsArray; track $index) {
+        <div class="row">
+            <div class="info-icon">
+                @if(detail.url){
+                    <a href="{{detail.url}}">
+                        {{iconInfo}}
+                    </a>
+                }
+            </div>
+            <div class="label">{{detail.subject}}</div>
+            <div class="separator">{{separator}}</div>
+            <div class="value">
+                {{detail.information}}
+            </div>
+
+          </div>
+    }
+   
+</div>
