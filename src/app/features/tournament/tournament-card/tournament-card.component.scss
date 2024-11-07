@@ -2,8 +2,10 @@
   .tournament-card {
     width: 250px;
     height: 240px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
+    border: 2px solid #000000;
+    -webkit-border-radius: 0px 20px 0px 20px;
+    -moz-border-radius: 0px 20px 0px 20px;
+    border-radius: 0px 20px 0px 20px;
     overflow: hidden;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
@@ -16,12 +18,12 @@
   .tournament-card-bottom{
     margin-left: 2px;
     margin-right: 2px;
-    border-width: 1px 1px 2px 2px;
+    border-width: 3px 0px 0px 0px;
     border-style: solid;
-    border-color: #6666668d;
+    border-color: #ffffff8d;
     border-radius: 8px;
-    -webkit-box-shadow: inset 5px 2px 25px 9px ; 
-    box-shadow: inset 5px 2px 25px 9px rgba(0,0,0,0.1);
+   // -webkit-box-shadow: inset 5px 2px 25px 9px ; 
+   //box-shadow: inset 5px 2px 25px 9px rgba(0,0,0,0.1);
   }
 
   .tournament-status{
@@ -62,7 +64,7 @@
   
   /* Nom du tournoi */
   .tournament-name {
-    font-family: "Mooli", sans-serif;
+    font-family: var(--font-text);
     height: 50px;
     font-size: 1.1rem;
     font-weight: bold;
