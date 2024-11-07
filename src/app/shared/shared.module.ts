@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { DetailsDisplayComponent } from './details.display/details.display.component';
+import { ChangeStatusComponent } from './change-status/change-status.component';
 
 
 
 @NgModule({
   declarations: [
     FeedbackComponent, 
-    DetailsDisplayComponent
+    DetailsDisplayComponent,
+    ChangeStatusComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { DetailsDisplayComponent } from './details.display/details.display.compo
     FormsModule,
     ReactiveFormsModule,
     FeedbackComponent,
-    DetailsDisplayComponent
+    DetailsDisplayComponent,
+    ChangeStatusComponent
     ]
 })
 export class SharedModule { }
