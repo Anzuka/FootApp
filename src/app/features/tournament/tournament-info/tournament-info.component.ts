@@ -6,6 +6,9 @@ import { AuthService } from '../../../auth.service';
 import { Observable } from 'rxjs';
 import { DetailsModel } from '../../../shared/details.display/models/details.model';
 import { DatePipe } from '@angular/common';
+import { getTournamentStatus, TournamentStatus } from '../tools/enums/tournament-status';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Message } from 'primeng/api';
 
 
 @Component({
@@ -16,17 +19,12 @@ import { DatePipe } from '@angular/common';
 
 })
 export class TournamentInfoComponent implements OnInit {
-
-changeTournamentStatus() {
-throw new Error('Method not implemented.');
-}
-deleteTournament() {
-throw new Error('Method not implemented.');
-}
-
+  tournamentStatus = TournamentStatus;
   tournament?: TournamentModel;
   isLoggedIn : Observable<boolean>;
 
+  messages: Message[] = [];
+TournamentStatus: any;
 
 
   constructor (private route: ActivatedRoute, private _tournamentService: TournamentService, private _authService: AuthService, private datePipe: DatePipe) { 
@@ -51,6 +49,38 @@ throw new Error('Method not implemented.');
     else
     return [];
   }
+
+  updateStatus($tournamentStatusString: string) {
+    if($tournamentStatusString){
+
+      const tournamentStatus =  getTournamentStatus($tournamentStatusString);
+      if(tournamentStatus && this.tournament){
+        const idTournament:number = this.tournament.id;
+
+        this._tournamentService.updateStatus(idTournament, tournamentStatus).subscribe({
+          next: () => {
+            // Refresh tournament informations
+            this._tournamentService.getById(idTournament).subscribe(data => {this.tournament = data;
+              console.log(data);
+            });
+          },
+          error:(error: HttpErrorResponse) => {
+            console.log("error", error);
+            this.messages = [{ severity: 'error', detail: error.error}];
+
+          }
+        });
+        // this.fromStatus = statusFound ? statusFound : this.fromStatus;
+        // this.refreshStatus();
+      }
+    
+    }
+  }
+
+  getTournamentTypeInOrder(): string[]{
+    return ['BUILDING', 'PENDING', 'STARTED', 'CLOSED'];
+  }
+    
 
   // Function to map from TournamentDetailModel to an array of DetailsModel
 mapTournamentDetailsToDetailsModel(tournament: TournamentModel): DetailsModel[] {
