@@ -1,0 +1,86 @@
+.info-table {
+    width: 100%;
+    border-width: 0px 0px 0px 2px;
+    border-style: solid;
+    border-color: #003366;
+    //sborder: 1px solid #ccc;
+    margin: 0 auto; /* Centrer sur la page */
+    -webkit-border-radius: 0px 0px 0px 8px;
+    -moz-border-radius: 0px 0px 0px 8px;
+    border-radius: 0px 0px 0px 8px;
+  }
+  
+  .header {
+    margin-top: 10px;
+    background-color: #003366;
+    color: #ffffff;
+    padding: 8px;
+    font-weight: bold;
+    width: 100px;
+    font-size: 1.1em;
+    border-width: 0px 0px 0px 0px;
+    border-style: solid;
+    border-radius: 0px 8px 8px 0px;
+
+  }
+  
+  .row {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-radius: 0px 0px 0px 8px;
+    border-bottom: 1px dashed #003366;
+    font-family: var(--font-text);
+    font-size: 2.8vw; /* Ajuste la taille de la police par défaut */
+  }
+  
+  .label {
+    width: 30%; /* Espace pour le label */
+    font-weight: bold;
+    padding-left: 5px;
+  }
+  
+  .separator {
+    width: 5%; /* Espace pour le ">>" */
+    text-align: center;
+    color: #003366;
+    font-size: 18px;
+    display: none;
+  }
+  
+  .value {
+    width: 60%; 
+    text-align: right; 
+    padding-right: 10px;
+  }
+  
+  .info-icon {
+    width: 8%; /* Espace pour l'icône d'info */
+    text-align: center;
+    color: #666666;
+    font-size: 1.2em;
+  }
+  
+  /* Media Query pour les écrans de taille moyenne (tablettes, etc.) */
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .info-table {
+      width: 80%; /* Réduit la largeur pour les écrans moyens */
+      font-size: 1.5vw; /* Réduit la taille de la police */
+    }
+  
+    .row {
+      font-size: 1.2em; /* Taille de police adaptée pour les tablettes */
+    }
+  }
+  
+  /* Media Query pour les grands écrans (ordinateurs de bureau, grands moniteurs) */
+  @media (min-width: 1200px) {
+    .info-table {
+      width: 70%; /* Limite la largeur à 70% pour les grands écrans */
+    }
+  
+    .row {
+      font-size: 1em; /* Taille de police standard pour les grands écrans */
+    }
+  }
+  

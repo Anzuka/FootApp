@@ -9,6 +9,9 @@ import { TournamentInfoComponent } from './tournament-info/tournament-info.compo
 import { TournamentFormComponent } from './tournament.form/tournament.form.component';
 import { CalendarModule } from 'primeng/calendar';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../../shared/shared.module';
+
+import { MessagesModule } from 'primeng/messages';
 
 
 
@@ -18,14 +21,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     TournamentCardComponent,
     TournamentInfoComponent,
     TournamentFormComponent
-  ],
+    ],
   imports: [
     CommonModule,
     CardModule,
     ButtonModule,
     TournamentRoutingModule,
     CalendarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule,
+    MessagesModule
   ]
 })
 export class TournamentModule { }

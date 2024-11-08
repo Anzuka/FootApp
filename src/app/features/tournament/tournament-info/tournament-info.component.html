@@ -1,30 +1,33 @@
 <div class="tournament-detail-container">
-    <div class="tournament-card">
-        @if(tournament){
-            <h2 class="tournament-title">{{ tournament.title }}</h2>
-            <div *ngIf="(isLoggedIn | async) && canEdit()">
-              <button (click)="deleteTournament()">Delete Tournament</button>
-              <button (click)="changeTournamentStatus()">Change Status</button>
-            </div>
-            <div class="tournament-info">
-              <p><strong>Start Date:</strong> {{ tournament.startDate | date: 'dd MMMM yyyy, HH:mm' }}</p>
-              <p><strong>End Date:</strong> {{ tournament.endDate | date: 'dd MMMM yyyy, HH:mm' }}</p>
-              <p><strong>Location:</strong> {{ tournament.placeName }}</p>
-              @if(tournament.address){
-                <div class="address">
-                    <p><strong>Address:</strong></p>
-                    <p>{{ tournament.address.street }}, {{ tournament.address.city }}</p>
-                    <p>{{ tournament.address.state }}, {{ tournament.address.zip }}, {{ tournament.address.country }}</p>
-                  </div>
-              }
-              <p><strong>Tournament Type:</strong> {{ tournament.tournamentType }}</p>
-              <p><strong>Status:</strong> 
-                <span class="status {{ tournament.tournamentStatus.toString()| lowercase }}">
-                  {{ tournament.tournamentStatus }}
-                </span>
-              </p>
-            </div>
-        }
-    </div>
-  </div>
+    @if(tournament){
+      <p-messages 
+      [value] = "messages" 
+      [enableService]="true" 
+      [closable]="true" />
+        <h2 class="tournament-title">{{ tournament.title }}</h2>
+
+        <div *ngIf="(isLoggedIn | async) && canEdit()" class="container-organizer">
+          <!-- <p><button (click)="deleteTournament()">Delete Tournament</button></p>
+          <p><button (click)="changeTournamentStatus()">Change Status</button></p> -->
+
+          <app-change-status 
+            (newStatusEvent)="updateStatus($event)" [statusList]=getTournamentTypeInOrder()
+            [currentStatus]="tournament.tournamentStatus"/> 
+            @if(tournament.tournamentStatus === tournamentStatus.STARTED){
+                <button (click)="updateStatus('INTERRUPTED')">⛔</button>
+            }
+            @if(tournament.tournamentStatus !== tournamentStatus.CLOSED){
+              <button (click)="updateStatus('CANCELED')">❌</button>
+            }
+            @if(tournament.tournamentStatus === tournamentStatus.INTERRUPTED){
+              <button (click)="updateStatus('STARTED')">✅</button>
+            }
+            
+        </div>
+
+
+        <app-details-display [detailsArray]="getDetailstournament()" headerName="INFO"></app-details-display>
+    }
+</div> 
+
   
