@@ -11,11 +11,10 @@ export class ErrorInterceptor implements HttpInterceptor {
   intercept (request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
         catchError((error: HttpErrorResponse) => {
+              console.error("intercept error: ", error);
 
             if (error.status === 403) {
-              console.error('Accès refusé - Erreur 403');
-              //this.router.navigate(['/']);
-              alert("Accès refusé - Erreur 403");
+              console.error("Accès refusé - Erreur 403");
             }
               return throwError(() => error);
             })
