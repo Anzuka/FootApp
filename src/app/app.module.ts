@@ -23,7 +23,7 @@ import { tokenInterceptor } from './core/interceptors/token.interceptor';
     ],
   providers: [
     provideHttpClient(withInterceptors([errorInterceptor, tokenInterceptor])),
-  
+
   ],
   bootstrap: [AppComponent]
 })
