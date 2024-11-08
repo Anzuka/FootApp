@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../tools/user.service';
 import {HttpErrorResponse} from '@angular/common/http';
+import {FeedbackBase} from '../../../shared/feedback/tools/feedback.base';
+import {ApiResponse} from '../tools/models/api-response';
+import {AuthService} from '../../../auth.service';
 
 
 @Component({
@@ -10,20 +13,19 @@ import {HttpErrorResponse} from '@angular/common/http';
   templateUrl: './request-new-password.component.html',
   styleUrl: './request-new-password.component.scss'
 })
-export class RequestNewPasswordComponent {
+export class RequestNewPasswordComponent implements OnInit{
   requestNewPasswordForm: FormGroup;
   captchaResolved = false;
-  showFeedback = false;
-  feedbackMessage: string = '';
-  isSuccess: boolean = true;
-  buttonText: string = '';
-  buttonAction: () => void = () => {};
+
+  newPasswordFeedback: FeedbackBase = new FeedbackBase();
+
 
 
   constructor(
     private _fb: FormBuilder,
     private _router: Router,
     private _userService: UserService,
+    private _authService: AuthService
   ) {
     this.requestNewPasswordForm = this._fb.group({
       email: ['', [Validators.required, Validators.email]]
@@ -34,41 +36,38 @@ export class RequestNewPasswordComponent {
     return this.requestNewPasswordForm.get('email')!;
   }
 
+  ngOnInit() {
+    if (this._authService.isConnected()){
+      let errorMessage: string = "You are already logged in! !! Access forbidden! To change your password, go to : “settings” -> “security” -> “change my password”. "
+      this.newPasswordFeedback.displayError(errorMessage, "Home");
+      this.newPasswordFeedback.buttonAction = () =>{
+        this._router.navigate(['']);
+      }
+    }
+  }
+
   onSubmit() {
     if (this.requestNewPasswordForm.valid && this.captchaResolved) {
       const email = this.requestNewPasswordForm.value.email;
       console.log("Réinitialisation de mot de passe pour:", email);
 
       this._userService.requestPassword(email).subscribe({
-        next: (result) => {
-          this.isSuccess = true;
-          this.feedbackMessage = "We've just sent you an email with instructions to reset your password. Please check your inbox and follow the link to complete the process.";
-          this.showFeedback = true;
-          this.buttonText = 'Back to login';
-          this.buttonAction = () => {
-            this._router.navigate(['/login']);
+        next: (result: ApiResponse) => {
+          this.newPasswordFeedback.displaySuccess(result.message, 'Login')
+          this.newPasswordFeedback.buttonAction = () => {
+            this._router.navigate(['user/login']);
           }
-
-
         },
         error: (error: HttpErrorResponse) => {
           console.error('Erreur de request password : ', error);
           console.log('Contenu de error.error : ', error.error); // Ajoute cette ligne
 
           // Assigne le message d'erreur correctement
-          if (error.error && typeof error.error === 'object' && error.error.error) {
-            this.feedbackMessage = error.error.error;
-          } else {
-            this.feedbackMessage = 'An error occurred while requesting a password reset. Please try again.';
+          let errorMessage: string = error.error.error? error.error.error : null;
+          this.newPasswordFeedback.displayError(errorMessage, 'Retry');
+          this.newPasswordFeedback.buttonAction = () => {
+            this.newPasswordFeedback.showFeedback = false;
           }
-
-          this.isSuccess = false;
-          this.showFeedback = true;
-          this.buttonText = 'Retry';
-          this.buttonAction = () => {
-            this._router.navigate(['/user/request-new-password']);
-          }
-
         }
       })
     }
