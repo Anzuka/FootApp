@@ -1,6 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Mooli&display=swap');
 
+:root {
+  --color-text: #111111;
+  --color-link: #125699;
+  --font-text: "Mooli", sans-serif;
+}
+
 /* Global container to center everything */
 .container {
     display: flex;

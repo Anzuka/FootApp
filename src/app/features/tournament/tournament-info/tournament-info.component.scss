@@ -1,7 +1,5 @@
 .tournament-detail-container {
-    display: flex;
-    justify-content: center;
-    padding: 2rem;
+     justify-content: center;
   }
   
   .tournament-card {
@@ -16,9 +14,15 @@
   
   .tournament-title {
     font-size: 1.8rem;
-    color: #333;
     text-align: center;
     margin-bottom: 1.5rem;
+
+    color: transparent;
+    background: #003366;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    text-shadow: 0px 3px 3px rgba(255,255,255,0.5);
   }
   
   .tournament-info {

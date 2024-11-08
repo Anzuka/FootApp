@@ -1,36 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { TournamentType } from '../tools/enums/tournament-type';
-import { TournamentStatus } from '../tools/enums/tournament-status';
 import { TournamentService } from '../tools/services/tournament.service';
 import { ActivatedRoute } from '@angular/router';
 import { TournamentModel } from '../tools/models/tournament.model';
 import { AuthService } from '../../../auth.service';
 import { Observable } from 'rxjs';
+import { DetailsModel } from '../../../shared/details.display/models/details.model';
+import { DatePipe } from '@angular/common';
 
-interface Address {
-  street: string;
-  city: string;
-  zip: string;
-  state: string;
-  country: string;
-}
-
-interface TournamentDetailModel {
-  title: string;
-  startDate: Date;
-  endDate: Date;
-  placeName: string;
-  address: Address;
-  tournamentType: TournamentType;
-  tournamentStatus: TournamentStatus;
-}
 
 @Component({
   selector: 'app-tournament-detail',
   templateUrl: './tournament-info.component.html',
-  styleUrls: ['./tournament-info.component.scss']
+  styleUrls: ['./tournament-info.component.scss'],
+  providers: [DatePipe]
+
 })
 export class TournamentInfoComponent implements OnInit {
+
 changeTournamentStatus() {
 throw new Error('Method not implemented.');
 }
@@ -43,7 +29,7 @@ throw new Error('Method not implemented.');
 
 
 
-  constructor (private route: ActivatedRoute, private _tournamentService: TournamentService, private _authService: AuthService) { 
+  constructor (private route: ActivatedRoute, private _tournamentService: TournamentService, private _authService: AuthService, private datePipe: DatePipe) { 
     this.isLoggedIn = _authService.isLoggedIn();
   }
 
@@ -58,4 +44,39 @@ throw new Error('Method not implemented.');
     
     return this.tournament && this.tournament.organizerId === this._authService.getUserId();
   }
+
+  getDetailstournament(): DetailsModel[] {
+    if(this.tournament)
+      return this.mapTournamentDetailsToDetailsModel(this.tournament);
+    else
+    return [];
+  }
+
+  // Function to map from TournamentDetailModel to an array of DetailsModel
+mapTournamentDetailsToDetailsModel(tournament: TournamentModel): DetailsModel[] {
+  return [
+    {
+      subject: 'START DATE',
+      information: this.datePipe.transform(tournament.startDate, 'dd MMMM yyyy, HH:mm'),
+    },
+    {
+      subject: 'END DATE',
+      information: this.datePipe.transform(tournament.endDate, 'dd MMMM yyyy, HH:mm'),
+    },
+    {
+      subject: 'PLACE',
+      information: tournament.placeName,
+    },
+    {
+      subject: 'TYPE',
+      information: tournament.tournamentType,
+      url: '/type'
+    },
+    {
+      subject: 'STATUS',
+      information: tournament.tournamentStatus.toString(),
+    }
+  ];
 }
+}
+
