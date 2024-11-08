@@ -1,35 +1,35 @@
-<div class="flex flex-column align-items-center justify-content-center min-h-screen">
-    <div class="flex flex-column md:flex-row align-items-center justify-content-center gap-5 w-full md:w-8">
-
-      <!-- Login Section -->
-      <div class="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
-        <div class="flex flex-wrap justify-content-center align-items-center gap-2">
-          <label class="w-6rem">Username</label>
-          <input pInputText id="username" type="text" class="w-12rem" [(ngModel)]="username" />
-        </div>
-        <div class="flex flex-wrap justify-content-center align-items-center gap-2">
-          <label class="w-6rem">Password</label>
-          <input pInputText id="password" type="password" class="w-12rem" [(ngModel)]="password" />
-        </div>
-        <p-button label="Login" icon="pi pi-user" styleClass="p-button-primary w-10rem mx-auto" (click)="login()" />
-      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-      </div>
-
-      <!-- Forgot password link?" -->
-      <div class="forgot-password">
-        <a routerLink="/user/request-new-password">Forgot your password?</a>
-      </div>
-
-      <!-- Divider Section -->
-      <div class="w-full md:w-1 flex justify-content-center align-items-center">
-        <p-divider layout="vertical" styleClass="hidden md:flex">
-          <b>OR</b>
-        </p-divider>
-      </div>
-
-      <!-- Sign Up Section -->
-      <div class="w-full md:w-5 flex align-items-center justify-content-center py-5">
-        <p-button label="Sign Up" icon="pi pi-user-plus" styleClass="p-button-success w-10rem" routerLink="/user/signup"/>
-      </div>
+<div class="form-container">
+  <form *ngIf="!feedbackLogin.showFeedback" [formGroup]="loginForm" (ngSubmit)="login()">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input id="username" formControlName="username" type="text" />
     </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input id="password" formControlName="password" type="password" />
+    </div>
+
+    <button type="submit" class="login-button" [disabled]="loginForm.invalid">Login</button>
+  </form>
+
+
+  <div *ngIf="!feedbackLogin.showFeedback" class="forgot-password-section">
+    <a routerLink="/user/request-new-password" class="forgot-password">Forgot your password?</a>
   </div>
+
+  <div *ngIf="!feedbackLogin.showFeedback" class="divider">
+    <span>OR</span>
+  </div>
+
+  <button *ngIf="!feedbackLogin.showFeedback" routerLink="/user/signup" class="signup-button">Sign Up</button>
+
+  <!-- Affichage conditionnel du FeedbackComponent pour les erreurs -->
+  <app-feedback
+    *ngIf="feedbackLogin.showFeedback"
+    [message]="feedbackLogin.feedbackMessage"
+    [isSuccess]="feedbackLogin.isFeedbackSuccess"
+    [buttonText]="feedbackLogin.buttonText"
+    (buttonClicked)="feedbackLogin.buttonAction()">
+  </app-feedback>
+</div>

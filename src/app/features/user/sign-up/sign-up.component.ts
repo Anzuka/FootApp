@@ -6,6 +6,7 @@ import { passwordStrengthValidator } from '../tools/validators/password-strength
 import {HttpErrorResponse} from '@angular/common/http';
 import {ApiResponse} from '../tools/models/api-response';
 import {Router} from '@angular/router';
+import {FeedbackBase} from '../../../shared/feedback/tools/feedback.base';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,12 +15,7 @@ import {Router} from '@angular/router';
 })
 export class SignUpComponent {
   signupForm: FormGroup;
-  feedbackMessage: string = '';
-  isFeedbackSuccess: boolean = true;
-  showFeedback: boolean = false;
-  buttonText: string = '';
-  buttonAction: () => void = () => {
-  };
+  feedbackSignup: FeedbackBase = new FeedbackBase();
 
   constructor(
     private _fb: FormBuilder,
@@ -52,10 +48,10 @@ export class SignUpComponent {
 
   onSubmit() {
     if (this.signupForm.invalid) {
-      this.feedbackMessage = 'Formulaire invalide. Veuillez corriger les erreurs et réessayer.';
-      this.isFeedbackSuccess = false;
-      this.showFeedback = true;
-      return;
+      this.feedbackSignup.displayError('Formulaire invalide. Veuillez corriger les erreurs et réessayer.', 'Back')
+      this.feedbackSignup.buttonAction = () =>{
+        this.feedbackSignup.showFeedback = false;
+      }
     }
 
     // Récupération des données du formulaire
@@ -63,12 +59,8 @@ export class SignUpComponent {
 
     this._userService.register(userData).subscribe({
       next: (response: ApiResponse) => {
-        console.log(response);
-        this.feedbackMessage = response.message;
-        this.isFeedbackSuccess = true;
-        this.showFeedback = true;
-        this.buttonText = 'Back to login';
-        this.buttonAction = () => {
+        this.feedbackSignup.displaySuccess(response.message, 'Back to login')
+        this.feedbackSignup.buttonAction = () => {
           this._router.navigate(['user/login']);
         };
       },
@@ -76,23 +68,32 @@ export class SignUpComponent {
         console.log('Contenu de error.error : ', err.error); // Debug pour l'erreur
 
         if (err.error && typeof err.error === 'object' && err.error.error) {
-          this.feedbackMessage = err.error.error;
+          this.feedbackSignup.displayError(err.error.error, 'Back')
+
         } else if (err.error && typeof err.error === 'object' && err.error.errors) {
-          console.log("error valid = ", err.error.errors);
-          this.feedbackMessage = err.error.errors[0];
+            console.log("error valid = ", err.error.errors);
+            this.feedbackSignup.displayError(err.error.errors[0], 'Back')
+          this._navBackToForm()
+
         } else {
-          this.feedbackMessage = "Une erreur s'est produite lors de l'enregistrement.";
+            this.feedbackSignup.displayError("Une erreur s'est produite lors de l'enregistrement.", 'Back');
+            this._navBackToForm()
         }
-        this.isFeedbackSuccess = false;
-        this.showFeedback = true;
-        this.buttonText = 'Back to form';
-        this.buttonAction = () => {
-          this.showFeedback = false;
-        };
+
       }
     });
   }
 
+  private _navToHome() {
+    this.feedbackSignup.buttonAction = () => {
+      this._router.navigate(['']);
+    }
+  }
+  private _navBackToForm(){
+      this.feedbackSignup.buttonAction = () =>{
+        this.feedbackSignup.showFeedback = false;
+      }
+  }
   //resetForm() {
   // this.signupForm.reset();
   // this.showFeedback = false;

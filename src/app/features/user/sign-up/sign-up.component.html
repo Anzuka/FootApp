@@ -1,5 +1,5 @@
 <div class="container">
-  <form *ngIf="!showFeedback" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <form *ngIf="!feedbackSignup.showFeedback" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
 
     <!-- Nom d'utilisateur -->
     <div>
@@ -111,10 +111,10 @@
   </form>
 
   <!-- Feedback -->
-  <app-feedback *ngIf="showFeedback"
-                [message]="feedbackMessage"
-                [isSuccess]="isFeedbackSuccess"
-                [buttonText]="buttonText"
-                (buttonClicked)="buttonAction()">
+  <app-feedback *ngIf="feedbackSignup.showFeedback"
+                [message]="feedbackSignup.feedbackMessage"
+                [isSuccess]="feedbackSignup.isFeedbackSuccess"
+                [buttonText]="feedbackSignup.buttonText"
+                (buttonClicked)="feedbackSignup.buttonAction()">
   </app-feedback>
 </div>
