@@ -11,6 +11,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 
+import { MessagesModule } from 'primeng/messages';
+
 
 
 @NgModule({
@@ -19,7 +21,7 @@ import { SharedModule } from '../../shared/shared.module';
     TournamentCardComponent,
     TournamentInfoComponent,
     TournamentFormComponent
-  ],
+    ],
   imports: [
     CommonModule,
     CardModule,
@@ -27,7 +29,8 @@ import { SharedModule } from '../../shared/shared.module';
     TournamentRoutingModule,
     CalendarModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    MessagesModule
   ]
 })
 export class TournamentModule { }

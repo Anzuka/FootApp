@@ -1,0 +1,13 @@
+<div class="status-container">
+    <div class="status current-status">
+        {{currentStatus}}
+    </div>
+    
+    <div *ngIf="nextStatus" class="button-container">
+        <button class="button-status" (click)="changeStatus()"> ▶ ▶ </button>
+    </div>
+    
+    <div *ngIf="nextStatus" class="status next-status">
+        {{nextStatus}}
+    </div>
+</div>

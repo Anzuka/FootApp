@@ -6,9 +6,9 @@ import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { FeaturesModule } from './features/features.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
-import { TokenInterceptor } from './core/interceptors/token.interceptor';
-import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { errorInterceptor } from './core/interceptors/error.interceptor';
+import { tokenInterceptor } from './core/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,18 +22,8 @@ import { ErrorInterceptor } from './core/interceptors/error.interceptor';
     BrowserAnimationsModule
     ],
   providers: [
-    provideHttpClient(withInterceptorsFromDi()),
-    provideHttpClient(),
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
-      multi: true
-    }
+    provideHttpClient(withInterceptors([errorInterceptor, tokenInterceptor])),
+  
   ],
   bootstrap: [AppComponent]
 })

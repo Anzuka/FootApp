@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TournamentModel } from '../models/tournament.model';
 import { TournamentCreateModel } from '../models/tournament.create.model';
+import { TournamentStatus } from '../enums/tournament-status';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,10 @@ export class TournamentService {
 
   getAllOrganizeTournament(): Observable<TournamentModel[]> {
     return this.http.get<TournamentModel[]> (`${this._tournamentEndPoint}/organize`);
+  }
 
+  updateStatus(id: number, tournamentStatus: TournamentStatus): Observable<void>{
+    
+    return this.http.put<void> (`${this._tournamentEndPoint}/status/${id}`, {tournamentStatus: tournamentStatus});
   }
 }

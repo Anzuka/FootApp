@@ -1,0 +1,57 @@
+/* Container */
+.status-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+}
+
+/* Status box styling */
+.status {
+    //width: 100px;
+    padding: 8px;
+    //border: 2px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-weight: bold;
+    //border-radius: 8px;
+    transition: all 0.3s;
+}
+
+/* Current status styling */
+.current-status {
+    background-color: #a2af4c; 
+    color: #fff;
+    border-color: #cab725;
+}
+
+/* Next status styling */
+.next-status {
+    background-color: #f0f0f0;
+    color: #888;
+}
+
+/* Button styling */
+.button-container {
+    display: flex;
+    align-items: center;
+}
+
+.button-status {
+    width: 50px;
+    border: 2px solid #ffffff;
+    background-color: #fff;
+    color: #333;
+    font-weight: bold;
+    font-size: 1.1em;
+    //border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Button hover effect */
+.button-status:hover {
+    background-color: #5b4caf; /* Active color on hover */
+    border-color: #5b4caf;
+    color: #fff;
+}
