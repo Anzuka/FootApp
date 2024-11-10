@@ -19,7 +19,7 @@ export class HeaderComponent {
   ngOnInit() {
     this.isConnected = this._authService.isLoggedIn();
     this.username = this._authService.getUsernameObservable();
-    
+
     this.items = [
       {
         label: 'Tournament',
@@ -27,6 +27,13 @@ export class HeaderComponent {
           { label: 'My Tournaments', icon: 'pi pi-fw pi-plus', url: '/tournament/organize' },
           { label: 'My Participations', icon: 'pi pi-fw pi-sign-in' },
           { label: 'All Tournaments', icon: 'pi pi-fw pi-search', url: '/tournament/search' }
+        ]
+      },
+      {
+        label: 'Match',
+        items: [
+          { label: 'My Match', icon: 'pi pi-fw pi-plus', },
+          { label: 'All Matches', icon: 'pi pi-fw pi-search', url: '/match/list' }
         ]
       },
       {
