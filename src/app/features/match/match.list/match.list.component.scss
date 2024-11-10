@@ -1,0 +1,85 @@
+:host {
+  .match-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centre la liste sur la page */
+    gap: 20px;
+
+    .match-card {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+      width: 70%; /* La carte prend environ 70 % de la largeur de l'écran */
+      max-width: 600px; /* Limite la largeur maximale */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .match-info {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .teams {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+
+      .team {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 40%; /* Chaque équipe prend 40% de la largeur pour garder un bon alignement */
+
+        .team-logo {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background-color: #ddd;
+          object-fit: cover;
+        }
+
+        .team-name {
+          font-weight: 600;
+          font-size: 16px;
+          color: #333;
+          text-align: center;
+          white-space: nowrap; /* Empêche le nom de se décaler sur plusieurs lignes */
+          overflow: hidden;
+          text-overflow: ellipsis; /* Ajoute des points de suspension si le nom est trop long */
+        }
+      }
+
+      .score {
+        width: 20%; /* Le score prend 20% pour rester centré */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-weight: bold;
+        text-align: center;
+
+        .score-number {
+          font-size: 28px;
+          color: #e63946;
+
+          /* Couleur du tiret pour les matchs non commencés */
+          &.pending {
+            color: #666; /* Gris pour le tiret */
+          }
+        }
+
+        .match-status {
+          font-size: 12px;
+          font-weight: 700;
+          color: #e63946;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}
