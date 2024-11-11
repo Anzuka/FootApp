@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatchModel} from '../tools/models/match.model';
 import {MatchService} from '../tools/match.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -10,8 +11,13 @@ import {MatchService} from '../tools/match.service';
 })
 export class MatchListComponent implements OnInit {
   matches: MatchModel[] = [];
+  imgTeamHome: string = 'assets/match/teamHome.jpg';
+  imgTeamAway: string = 'assets/match/teamAway.jpg';
 
-  constructor(private _matchService: MatchService) {}
+  constructor(
+      private _matchService: MatchService,
+      private _router: Router
+      ) {}
 
   ngOnInit(): void {
     this._matchService.getAllMatches().subscribe({
@@ -21,5 +27,9 @@ export class MatchListComponent implements OnInit {
       },
       error: (err) => console.error("Erreur lors de la récupération des matchs:", err)
     });
+  }
+
+  navToMatchDetails(id:number): void{
+    this._router.navigate([`/match/details`, id])
   }
 }
