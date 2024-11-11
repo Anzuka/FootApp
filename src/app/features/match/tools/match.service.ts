@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {MatchModel} from './models/match.model';
+import {MatchDetailsModel} from './models/match.details.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,10 @@ export class MatchService {
 
   getAllMatches(): Observable<MatchModel[]> {
     return this._http.get<MatchModel[]>(`${this.apiUrl}`, {})
+  }
+
+  getMatchDetails(id: number): Observable<MatchDetailsModel> {
+    return this._http.get<MatchDetailsModel>(`${this.apiUrl}/${id}`, {})
   }
 
 }
