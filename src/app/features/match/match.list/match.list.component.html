@@ -1,5 +1,5 @@
-<div class="match-list">
-  <div *ngFor="let match of matches" class="match-card">
+<div class="match-list" >
+  <div *ngFor="let match of matches" class="match-card" (click)="navToMatchDetails(match.id)">
     <div class="match-info">
       <span class="match-date">{{ match.dateMatch | date: 'dd.MM.yyyy HH:mm' }}</span>
     </div>
@@ -7,7 +7,7 @@
     <div class="teams">
       <!-- Home Team -->
       <div class="team home-team">
-        <img *ngIf="match.teamHome.logoUrl" [src]="match.teamHome.logoUrl" alt="Logo {{ match.teamHome.name }}" class="team-logo" />
+        <img src="{{imgTeamHome}}" class="team-logo" />
         <span class="team-name">{{ match.teamHome.name }}</span>
       </div>
 
@@ -27,7 +27,7 @@
 
       <!-- Away Team -->
       <div class="team away-team">
-        <img *ngIf="match.teamAway.logoUrl" [src]="match.teamAway.logoUrl" alt="Logo {{ match.teamAway.name }}" class="team-logo" />
+        <img src="{{ imgTeamAway }}" alt="Logo {{ match.teamAway.name }}" class="team-logo" />
         <span class="team-name">{{ match.teamAway.name }}</span>
       </div>
     </div>
