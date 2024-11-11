@@ -1,0 +1,53 @@
+<div *ngIf="match" class="match-details">
+  <!-- Carte du match -->
+  <div class="match-card">
+    <!-- En-tête du match avec date et tournoi -->
+    <div class="match-info-header">
+      <span class="league-info">Tournament (A injecté!) - {{ match.matchStage | titlecase }} </span>
+      <span class="match-date">{{ match.matchDate | date: 'dd.MM.yyyy HH:mm' }}</span>
+    </div>
+
+    <!-- Informations sur les équipes et le score -->
+    <div class="match-header">
+      <div class="team home-team">
+        <img src="{{imgTeamHome}}" alt="{{ match.teamHome.name }}" class="team-logo" />
+        <span class="team-name">{{ match.teamHome.name }}</span>
+      </div>
+
+      <div class="score-info">
+        <!-- Afficher le score si le match est en cours ou terminé -->
+        <div *ngIf="match.matchStatus === 'INPROGRESS' || match.matchStatus === 'FINISHED'" class="score">
+          <span>{{ match.scoreTeamHome }}</span> - <span>{{ match.scoreTeamAway }}</span>
+        </div>
+        <!-- Placeholder pour les matchs qui ne sont pas encore commencés -->
+        <div *ngIf="match.matchStatus === 'SCHEDULED' || match.matchStatus === 'CANCELED'" class="score-placeholder">
+          -
+        </div>
+        <div class="match-status">
+          <span *ngIf="match.matchStatus === 'INPROGRESS'">1ST HALF</span>
+          <span *ngIf="match.matchStatus === 'FINISHED'">FT</span>
+          <span *ngIf="match.matchStatus === 'SCHEDULED'">Scheduled</span>
+        </div>
+      </div>
+
+      <div class="team away-team">
+        <img src="{{ imgTeamAway }}" alt="{{ match.teamAway.name }}" class="team-logo" />
+        <span class="team-name">{{ match.teamAway.name }}</span>
+      </div>
+    </div>
+
+    <!-- Informations supplémentaires : étape, localisation et arbitre -->
+    <div class="match-extra-info">
+      <span class="match-stage">{{ match.matchStage | titlecase }}</span>
+      <span class="match-location">{{ match.fieldLocation }}</span>
+      <span class="match-referee" *ngIf="match.refereeDTO">Referee: {{ match.refereeDTO.firstname }} {{ match.refereeDTO.lastname }}</span>
+    </div>
+  </div>
+
+  <!-- Menu pour changer de vue entre les informations, les compositions, les statistiques -->
+  <div class="menu-bar">
+    <button (click)="selectTab('info')" [class.active]="activeTab === 'info'">Summary</button>
+    <button (click)="selectTab('lineups')" [class.active]="activeTab === 'lineups'">Lineups</button>
+    <button (click)="selectTab('stats')" [class.active]="activeTab === 'stats'">Stats</button>
+  </div>
+</div>
