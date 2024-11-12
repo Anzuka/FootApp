@@ -8,9 +8,13 @@ const routes: Routes = [
     {
       path:'user', loadChildren: ()=> import('./user/user.module').then(m => m.UserModule)
     },
-    { 
+    {
       path: 'tournament', loadChildren: () => import('./tournament/tournament.module').then(m => m.TournamentModule)
-    }
+    },
+  {
+    path: 'match', loadChildren:() => import('./match/match.module').then(m => m.MatchModule)
+  }
+
 
 ];
 
