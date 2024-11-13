@@ -3,7 +3,8 @@
   <div class="match-card">
     <!-- En-tête du match avec date et tournoi -->
     <div class="match-info-header">
-      <span class="league-info">Tournament (A injecté!) - {{ match.matchStage | titlecase }} </span>
+      <span class="match-referee" *ngIf="match.tournamentSmallDetailsDTO">{{ match.tournamentSmallDetailsDTO.name }}</span>
+      <span class="league-info"> - {{ match.matchStage | titlecase }} </span>
       <span class="match-date">{{ match.matchDate | date: 'dd.MM.yyyy HH:mm' }}</span>
     </div>
 
@@ -52,6 +53,8 @@
     <button *ngIf="match.matchStage == 'GROUP_STAGE'" (click)="selectTab('ranking')" [class.active]="activeTab === 'ranking'">Ranking</button>
   </div>
 
-  <!-- Affichage du composant Ranking en fonction de l'onglet sélectionné
-  <app-ranking *ngIf="activeTab === 'ranking'" [rankingData]="rankingData"></app-ranking>-->
+  <app-ranking *ngIf="displayRanking"
+               [rankings]="rankings"
+               (rankingLoaded)="handleRankingLoaded($event)">
+  </app-ranking>
 </div>
