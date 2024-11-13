@@ -8,16 +8,15 @@ import { RankingComponent } from './ranking/ranking.component';
 
 
 
+
 @NgModule({
   declarations: [
     HomeComponent,
-    RankingComponent,
-
+    RankingComponent
   ],
   imports: [
     FeaturesRoutingModule,
     SharedModule,
-    UserModule,
-  ]
+    UserModule  ]
 })
 export class FeaturesModule { }
