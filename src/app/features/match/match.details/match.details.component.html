@@ -49,5 +49,9 @@
     <button (click)="selectTab('info')" [class.active]="activeTab === 'info'">Summary</button>
     <button (click)="selectTab('lineups')" [class.active]="activeTab === 'lineups'">Lineups</button>
     <button (click)="selectTab('stats')" [class.active]="activeTab === 'stats'">Stats</button>
+    <button *ngIf="match.matchStage == 'GROUP_STAGE'" (click)="selectTab('ranking')" [class.active]="activeTab === 'ranking'">Ranking</button>
   </div>
+
+  <!-- Affichage du composant Ranking en fonction de l'onglet sélectionné
+  <app-ranking *ngIf="activeTab === 'ranking'" [rankingData]="rankingData"></app-ranking>-->
 </div>
