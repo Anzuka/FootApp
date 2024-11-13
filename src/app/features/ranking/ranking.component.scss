@@ -1,0 +1,106 @@
+.ranking-container {
+  width: 100%;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.ranking-tabs, .ranking-header {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+
+  .tab, .sub-tab {
+    padding: 8px 16px;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .tab.active, .sub-tab.active {
+    background-color: #d62626;
+    color: #fff;
+  }
+}
+
+.ranking-table {
+  width: 100%;
+  table-layout: fixed;  // Assure une largeur fixe des colonnes
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 14px;
+
+  th, td {
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    height: 50px;  // Hauteur uniforme pour chaque ligne
+  }
+
+  th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+  }
+
+  td.team {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 10px;
+
+    .flag {
+      width: 20px;
+      height: 15px;
+      margin-right: 8px;
+    }
+  }
+
+  td.form {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+
+    .form-icon {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 12px;
+      font-weight: bold;
+
+      &.w {
+        background-color: #28a745;
+      }
+      &.d {
+        background-color: #ffc107;
+      }
+      &.l {
+        background-color: #dc3545;
+      }
+    }
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f7f7f7;
+  }
+
+  tbody tr:first-child {
+    font-weight: bold;
+  }
+}
+
+.promotion-note {
+  margin-top: 15px;
+  font-size: 12px;
+  color: #666;
+
+  p {
+    margin: 2px 0;
+  }
+}

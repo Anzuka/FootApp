@@ -1,1 +1,55 @@
-<p>ranking works!</p>
+<div class="ranking-container">
+  <div class="ranking-tabs">
+    <button class="tab active">Standings</button>
+    <button class="tab">Over/Under</button>
+    <button class="tab">HT/FT</button>
+    <button class="tab">Top Scorers</button>
+  </div>
+
+  <div class="ranking-header">
+    <button class="sub-tab active">Overall</button>
+    <button class="sub-tab">Home</button>
+    <button class="sub-tab">Away</button>
+  </div>
+
+  <table class="ranking-table">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Team</th>
+      <th>MP</th>
+      <th>W</th>
+      <th>D</th>
+      <th>L</th>
+      <th>G</th>
+      <th>GD</th>
+      <th>PTS</th>
+      <th>FORM</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ranking of sortedRankings$ | async">
+      <td>{{ ranking.rankingPosition }}</td>
+      <td class="team">
+        <img src="assets/flags/{{ ranking.team.name | lowercase }}.png" alt="Flag" class="flag" />
+        {{ ranking.team.name }}
+      </td>
+      <td>{{ ranking.nbMatchPlayed }}</td>
+      <td>{{ ranking.nbWins }}</td>
+      <td>{{ ranking.nbDraws }}</td>
+      <td>{{ ranking.nbLosses }}</td>
+      <td>{{ ranking.goalsFor }}:{{ ranking.goalsAgainst }}</td>
+      <td>{{ ranking.goalsDiff }}</td>
+      <td>{{ ranking.totalPoints }}</td>
+      <td class="form">
+        <span *ngFor="let form of ['W', 'D', 'L', 'W', 'D']" class="form-icon {{ form | lowercase }}">{{ form }}</span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="promotion-note">
+    <p>Promotion - {{ rankings[0].tournament.name }}</p>
+    <p>If points are tied at the end of the competition, head-to-head matches will be the tie-breaker.</p>
+  </div>
+</div>
