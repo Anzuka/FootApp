@@ -19,4 +19,9 @@ export class RankingService {
 
     return this._http.get<RankingModel[]>(`${this.apiUrl}/by-tournament-team`, { params });
   }
+
+
+  getAllByTournamentId(tournamentId: number): Observable<RankingModel[]> {
+    return this._http.get<RankingModel[]>(`${this.apiUrl}/by-tournament/${tournamentId}`);
+  }
 }

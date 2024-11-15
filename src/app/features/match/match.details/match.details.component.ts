@@ -3,8 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 import {MatchService} from '../tools/match.service';
 import {MatchDetailsModel} from '../tools/models/match.details.model';
 import {HttpErrorResponse} from '@angular/common/http';
-import {RankingService} from '../../ranking/tools/ranking.service';
-import {RankingModel} from '../../ranking/tools/ranking.model';
+import {RankingModel} from '../../../shared/ranking/tools/ranking.model';
+import {RankingService} from '../../../shared/ranking/tools/ranking.service';
 
 @Component({
   selector: 'app-match.details',
