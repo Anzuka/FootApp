@@ -9,6 +9,8 @@ import { DatePipe } from '@angular/common';
 import { getTournamentStatus, TournamentStatus } from '../tools/enums/tournament-status';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Message } from 'primeng/api';
+import {RankingModel} from '../../../shared/ranking/tools/ranking.model';
+import {RankingService} from '../../../shared/ranking/tools/ranking.service';
 
 
 @Component({
@@ -20,26 +22,38 @@ import { Message } from 'primeng/api';
 })
 export class TournamentInfoComponent implements OnInit {
   tournamentStatus = TournamentStatus;
-  tournament?: TournamentModel;
+  tournament!: TournamentModel;
   isLoggedIn : Observable<boolean>;
-
+  rankings: RankingModel[] = [];
+  displayRanking: boolean = false;
   messages: Message[] = [];
-TournamentStatus: any;
+  TournamentStatus: any;
 
 
-  constructor (private route: ActivatedRoute, private _tournamentService: TournamentService, private _authService: AuthService, private datePipe: DatePipe) { 
-    this.isLoggedIn = _authService.isLoggedIn();
-  }
+  constructor (
+               private route: ActivatedRoute,
+               private _tournamentService: TournamentService,
+               private _authService: AuthService,
+               private datePipe: DatePipe,
+               private _rankingService: RankingService
+              ) {
+                    this.isLoggedIn = _authService.isLoggedIn();
+              }
 
   ngOnInit (): void {
     const id:number = this.route.snapshot.params['id'];
     this._tournamentService.getById(id).subscribe(data => {this.tournament = data;
+      this.tournament = data;
       console.log(data);
+      // Charger les rankings au moment de l'initialisation
+      if (this.tournament) {
+        this.loadRankings(this.tournament.id);
+      }
     });
   }
 
   canEdit() : boolean | undefined {
-    
+
     return this.tournament && this.tournament.organizerId === this._authService.getUserId();
   }
 
@@ -73,14 +87,32 @@ TournamentStatus: any;
         // this.fromStatus = statusFound ? statusFound : this.fromStatus;
         // this.refreshStatus();
       }
-    
+
     }
   }
 
   getTournamentTypeInOrder(): string[]{
     return ['BUILDING', 'PENDING', 'STARTED', 'CLOSED'];
   }
-    
+
+  handleRankingLoaded(event: boolean): void {
+    console.log("Ranking component has loaded:", event);
+    // Tu peux ajouter des actions spécifiques ici
+  }
+
+  loadRankings(tournamentId: number): void {
+    this._rankingService.getAllByTournamentId(tournamentId).subscribe({
+      next: (data) => {
+        this.rankings = data;
+        console.log("rankings loaded : ", data);
+        this.displayRanking = true;
+      },
+      error: (error) => {
+        console.error('Erreur lors du chargement du classement', error);
+      }
+    });
+  }
+
 
   // Function to map from TournamentDetailModel to an array of DetailsModel
 mapTournamentDetailsToDetailsModel(tournament: TournamentModel): DetailsModel[] {
