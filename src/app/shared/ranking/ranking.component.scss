@@ -6,6 +6,22 @@
   padding: 20px;
   font-family: Arial, sans-serif;
 }
+.group-title {
+  text-align: center; // Centrer le titre
+  margin-top: 0; // Espacement vertical autour du titre
+  //padding: 10px; // Espacement interne
+  background-color: #f9f9f0; // Fond légèrement coloré pour distinguer
+  //border: 1px solid #d0e0f0; // Bordure discrète en accord avec le fond
+  //border-radius: 8px; // Coins arrondis pour une apparence plus douce
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Légère ombre pour de la profondeur
+
+  h3 {
+    font-size: 1.8rem; // Taille légèrement augmentée pour le titre
+    font-weight: bold; // Met en valeur le titre
+    color: #333; // Couleur du texte sombre pour un bon contraste
+    margin: 0; // Pas d'espacement supplémentaire
+  }
+}
 
 .ranking-tabs, .ranking-header {
   display: flex;
