@@ -1,7 +1,7 @@
 .tournament-detail-container {
      justify-content: center;
   }
-  
+
   .tournament-card {
     max-width: 600px;
     padding: 1.5rem;
@@ -11,7 +11,7 @@
     font-family: Arial, sans-serif;
     background-color: #f8f8f8;
   }
-  
+
   .tournament-title {
     font-size: 1.8rem;
     text-align: center;
@@ -24,34 +24,34 @@
     background-clip: text;
     text-shadow: 0px 3px 3px rgba(255,255,255,0.5);
   }
-  
+
   .tournament-info {
     font-size: 1rem;
     color: #555;
-  
+
     p {
       margin: 0.5rem 0;
     }
-  
+
     .address {
       margin: 1rem 0;
     }
-  
+
     .status {
       padding: 0.3rem 0.6rem;
       border-radius: 4px;
       font-weight: bold;
-  
+
       &.pending {
         color: #856404;
         background-color: #fff3cd;
       }
-  
+
       &.in-progress {
         color: #0c5460;
         background-color: #d1ecf1;
       }
-  
+
       &.closed {
         color: #721c24;
         background-color: #f8d7da;
@@ -67,4 +67,41 @@
   align-items: center;
   justify-content: center;
   display: flex;
+}
+
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px; // Ajouter un espace entre le titre et les groupes
+}
+
+// Espacer les groupes de standings
+ul {
+  list-style: none; // Retire les puces des listes, si ce n'est pas déjà fait
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin-bottom: 30px; // Espace vertical entre chaque groupe
+  }
+}
+
+// Encadrer ou structurer chaque groupe
+li {
+  padding: 15px;
+  border: 1px solid #ddd; // Bordure discrète autour de chaque groupe
+  border-radius: 8px; // Coins arrondis
+  background-color: #f9f9f9; // Couleur de fond légère pour distinguer
+}
+
+// Pour les titres des groupes (par exemple, "GROUPE 1")
+h3 {
+  text-align: center;
+  font-size: 1.5rem; // Taille un peu plus grande pour les titres des groupes
+  margin-bottom: 10px; // Espacement entre le titre et le contenu du groupe
+}
+
+// Boutons ou badges dans les standings (si nécessaires)
+button, .badge {
+  margin: 5px;
 }
