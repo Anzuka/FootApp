@@ -30,11 +30,17 @@
 
         <app-participating-teams [tournamentId]="tournament.id"></app-participating-teams>
 
-      <!-- Afficher le RankingComponent en passant les données rankings -->
-      <app-ranking *ngIf="displayRanking"
-                   [rankings]="rankings"
-                   (rankingLoaded)="handleRankingLoaded($event)">
-      </app-ranking>
+        <h2> Standings</h2>
+        <ul>
+          <li *ngFor=" let rankings of rankingsArray">
+
+            <app-ranking [rankings]="rankings"
+                         (rankingLoaded)="handleRankingLoaded($event)">
+
+            </app-ranking>
+
+          </li>
+        </ul>
+
     }
 </div>
-
