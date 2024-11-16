@@ -24,10 +24,9 @@ export class TournamentInfoComponent implements OnInit {
   tournamentStatus = TournamentStatus;
   tournament!: TournamentModel;
   isLoggedIn : Observable<boolean>;
-  rankings: RankingModel[] = [];
+  rankingsArray: Array<RankingModel[]> = [];
   displayRanking: boolean = false;
   messages: Message[] = [];
-  TournamentStatus: any;
 
 
   constructor (
@@ -49,6 +48,29 @@ export class TournamentInfoComponent implements OnInit {
       if (this.tournament) {
         this.loadRankings(this.tournament.id);
       }
+    });
+  }
+
+  loadRankings(tournamentId: number): void {
+    this._rankingService.getAllByTournamentId(tournamentId).subscribe({
+      next: (data) => {
+        this.sortRankingsByGroup(data);
+        console.log("rankings loaded : ", data);
+        this.displayRanking = true;
+      },
+      error: (error) => {
+        console.error('Erreur lors du chargement du classement', error);
+      }
+    });
+  }
+
+  sortRankingsByGroup(listOfRankings: RankingModel[]): void {
+    // Initialisation de rankingsArray pour être sûr d'avoir des sous-tableaux prêts à l'emploi
+    listOfRankings.forEach(r => {
+      if (!this.rankingsArray[r.numGroup - 1]) {
+        this.rankingsArray[r.numGroup - 1] = []; // Crée un tableau vide pour ce groupe si nécessaire
+      }
+      this.rankingsArray[r.numGroup - 1].push(r);
     });
   }
 
@@ -100,18 +122,6 @@ export class TournamentInfoComponent implements OnInit {
     // Tu peux ajouter des actions spécifiques ici
   }
 
-  loadRankings(tournamentId: number): void {
-    this._rankingService.getAllByTournamentId(tournamentId).subscribe({
-      next: (data) => {
-        this.rankings = data;
-        console.log("rankings loaded : ", data);
-        this.displayRanking = true;
-      },
-      error: (error) => {
-        console.error('Erreur lors du chargement du classement', error);
-      }
-    });
-  }
 
 
   // Function to map from TournamentDetailModel to an array of DetailsModel
