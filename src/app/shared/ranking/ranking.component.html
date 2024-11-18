@@ -1,4 +1,10 @@
 <div class="ranking-container">
+  <!-- Ajouter le titre du groupe -->
+  <div class="group-title">
+    <h3>Groupe {{numGroup}}</h3>
+  </div>
+
+  <!-- Vos onglets existants -->
   <div class="ranking-tabs">
     <button class="tab active">Standings</button>
     <button class="tab">Over/Under</button>
@@ -6,12 +12,14 @@
     <button class="tab">Top Scorers</button>
   </div>
 
+  <!-- Sous-onglets -->
   <div class="ranking-header">
     <button class="sub-tab active">Overall</button>
     <button class="sub-tab">Home</button>
     <button class="sub-tab">Away</button>
   </div>
 
+  <!-- Votre tableau de classement -->
   <table class="ranking-table">
     <thead>
     <tr>
@@ -28,10 +36,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let ranking of sortedRankings$ | async">
+    <tr *ngFor="let ranking of rankings">
       <td>{{ ranking.rankingPosition }}</td>
       <td class="team">
-        <img src="assets/flags/{{ ranking.team.name | lowercase }}.png" alt="Flag" class="flag" />
+        <span class="flag"></span>
         {{ ranking.team.name }}
       </td>
       <td>{{ ranking.nbMatchPlayed }}</td>
@@ -42,12 +50,16 @@
       <td>{{ ranking.goalsDiff }}</td>
       <td>{{ ranking.totalPoints }}</td>
       <td class="form">
-        <span *ngFor="let form of ['W', 'D', 'L', 'W', 'D']" class="form-icon {{ form | lowercase }}">{{ form }}</span>
+        <!-- Exemple d'icône de formulaire -->
+        <span class="form-icon w">W</span>
+        <span class="form-icon d">D</span>
+        <span class="form-icon l">L</span>
       </td>
     </tr>
     </tbody>
   </table>
 
+  <!-- Note de promotion -->
   <div class="promotion-note">
     <p>Promotion - {{ rankings[0].tournament.name }}</p>
     <p>If points are tied at the end of the competition, head-to-head matches will be the tie-breaker.</p>

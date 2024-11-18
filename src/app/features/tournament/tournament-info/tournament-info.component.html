@@ -1,8 +1,8 @@
 <div class="tournament-detail-container">
     @if(tournament){
-      <p-messages 
-      [value] = "messages" 
-      [enableService]="true" 
+      <p-messages
+      [value] = "messages"
+      [enableService]="true"
       [closable]="true" />
         <h2 class="tournament-title">{{ tournament.title }}</h2>
 
@@ -10,9 +10,9 @@
           <!-- <p><button (click)="deleteTournament()">Delete Tournament</button></p>
           <p><button (click)="changeTournamentStatus()">Change Status</button></p> -->
 
-          <app-change-status 
+          <app-change-status
             (newStatusEvent)="updateStatus($event)" [statusList]=getTournamentTypeInOrder()
-            [currentStatus]="tournament.tournamentStatus"/> 
+            [currentStatus]="tournament.tournamentStatus"/>
             @if(tournament.tournamentStatus === tournamentStatus.STARTED){
                 <button (click)="updateStatus('INTERRUPTED')">⛔</button>
             }
@@ -22,14 +22,25 @@
             @if(tournament.tournamentStatus === tournamentStatus.INTERRUPTED){
               <button (click)="updateStatus('STARTED')">✅</button>
             }
-            
+
         </div>
 
 
         <app-details-display [detailsArray]="getDetailstournament()" headerName="INFO"></app-details-display>
-      
-        <app-participating-teams [tournamentId]="tournament.id"></app-participating-teams>
-    }
-</div> 
 
-  
+        <app-participating-teams [tournamentId]="tournament.id"></app-participating-teams>
+
+        <h2> Standings</h2>
+        <ul>
+          <li *ngFor=" let rankings of rankingsArray">
+
+            <app-ranking [rankings]="rankings"
+                         (rankingLoaded)="handleRankingLoaded($event)">
+
+            </app-ranking>
+
+          </li>
+        </ul>
+
+    }
+</div>

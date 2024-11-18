@@ -12,6 +12,7 @@ export class RankingComponent implements OnInit {
   @Input() rankings!: RankingModel[]; // Utilisation de @Input pour recevoir les données
   @Output() rankingLoaded = new EventEmitter<boolean>();
   sortedRankings$!: Observable<RankingModel[]>;
+  numGroup: number = 0
 
   ngOnInit() {
     console.log("rankings from ranking: ",this.rankings);
@@ -20,5 +21,6 @@ export class RankingComponent implements OnInit {
     this.sortedRankings$ = of(this.rankings).pipe(
       map(rankings => rankings.sort((a, b) => a.rankingPosition - b.rankingPosition))
     );
+    this.numGroup = this.rankings[0].numGroup
   }
 }

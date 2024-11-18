@@ -4,14 +4,16 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { DetailsDisplayComponent } from './details.display/details.display.component';
 import { ChangeStatusComponent } from './change-status/change-status.component';
+import {RankingComponent} from './ranking/ranking.component'
 
 
 
 @NgModule({
   declarations: [
-    FeedbackComponent, 
+    FeedbackComponent,
     DetailsDisplayComponent,
-    ChangeStatusComponent
+    ChangeStatusComponent,
+    RankingComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { ChangeStatusComponent } from './change-status/change-status.component';
     ReactiveFormsModule,
     FeedbackComponent,
     DetailsDisplayComponent,
-    ChangeStatusComponent
+    ChangeStatusComponent,
+    RankingComponent
     ]
 })
 export class SharedModule { }
