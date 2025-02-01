@@ -1,0 +1,26 @@
+# Dépendances
+node_modules
+npm-debug.log
+
+# Fichiers de build
+dist
+.angular
+
+# Fichiers de développement et de configuration
+.git
+.gitignore
+README.md
+
+# Fichiers de système
+.DS_Store
+Thumbs.db
+
+# Fichiers de configuration IDE
+.vscode
+.idea
+
+# Fichiers de logs
+*.log
+
+# Répertoires de cache
+.cache
