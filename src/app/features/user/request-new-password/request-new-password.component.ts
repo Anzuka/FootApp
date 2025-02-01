@@ -15,8 +15,6 @@ import {AuthService} from '../../../auth.service';
 })
 export class RequestNewPasswordComponent implements OnInit{
   requestNewPasswordForm: FormGroup;
-  captchaResolved = false;
-
   newPasswordFeedback: FeedbackBase = new FeedbackBase();
 
 
@@ -47,7 +45,7 @@ export class RequestNewPasswordComponent implements OnInit{
   }
 
   onSubmit() {
-    if (this.requestNewPasswordForm.valid && this.captchaResolved) {
+    if (this.requestNewPasswordForm.valid) {
       const email = this.requestNewPasswordForm.value.email;
       console.log("Réinitialisation de mot de passe pour:", email);
 
@@ -73,7 +71,4 @@ export class RequestNewPasswordComponent implements OnInit{
     }
   }
 
-  onCaptchaResolved(captchaResponse: string | null) {
-    this.captchaResolved = !!captchaResponse; // Met à true si le reCAPTCHA est résolu
-  }
 }
